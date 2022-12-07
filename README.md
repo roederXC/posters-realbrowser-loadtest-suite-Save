@@ -10,7 +10,5 @@ To learn all about the basic feature set around configuration and data, refer to
 
 ## Configuration
 
-
-
 WIP
 

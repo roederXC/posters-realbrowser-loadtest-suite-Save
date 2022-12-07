@@ -76,7 +76,7 @@ public class TGuestCheckout extends LoadTestCase
                 }
                 else
                 {
-                    GeneralPage.openCategory();
+                    GeneralPage.openSubCategory();
                 }
             }
         }
@@ -88,7 +88,6 @@ public class TGuestCheckout extends LoadTestCase
         {
             GeneralPage.executePaging();
             GeneralPage.openProductDetailsPage();
-        }
-        
+        }        
     }
 }
