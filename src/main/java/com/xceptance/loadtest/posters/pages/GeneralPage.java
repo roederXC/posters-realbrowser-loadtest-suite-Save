@@ -101,7 +101,20 @@ public class GeneralPage
             $("#miniCartMenu .btn-primary").should(visible).hover().click();
             
             $("#cartOverviewTable").should(visible);
+        });        
+    }
+    
+    public static void openCreateNewAccount()
+    {
+        Action.run("OpenCreateNewAccount", () ->
+        {
+            // click Create new Account
+            
+            $("#showUserMenu").should(visible).hover();
+            $("#userMenu .goToRegistration").should(visible).click();
+            
+            // verify register page
+            $("#btnRegister").should(exist);
         });
-        
     }
 }
