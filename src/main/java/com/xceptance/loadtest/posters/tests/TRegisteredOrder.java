@@ -23,6 +23,9 @@ public class TRegisteredOrder extends LoadTestCase
 	 */
     public void test() throws FlowStoppedException
     {
+        // Flag test case
+        Context.requiresRegisteredAccount(true);
+        
         Context.get().data.attachAccount();
         
     	// loads the homepage, data needed is taking from the properties automatically

@@ -16,7 +16,7 @@ import com.xceptance.xlt.api.util.XltRandom;
 
 /**
  * 
- * @author proeder
+ * @author roederXC (Xceptance Software Technologies GmbH)
  */
 public class LoginPage 
 {
