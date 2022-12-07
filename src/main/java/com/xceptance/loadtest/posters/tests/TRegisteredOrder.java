@@ -41,9 +41,9 @@ public class TRegisteredOrder extends LoadTestCase
     	LoginPage.fillAccountForm();
     	LoginPage.submitForm();
     	
-    	
     	int targetItemCount = Context.configuration().addToCartCount.value;
     	final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);
+    	
     	while (Context.get().data.totalAddToCartCount < targetItemCount)
         {
             // Check if the maximum number of attempts is reached
@@ -57,6 +57,7 @@ public class TRegisteredOrder extends LoadTestCase
             // add to cart
             ProductDetailsPage.addToCart();
         }
+    	
     	GeneralPage.viewCart();
     	
     	CartPage.proceedToCheckout();
@@ -92,7 +93,7 @@ public class TRegisteredOrder extends LoadTestCase
                 }
                 else
                 {
-                    GeneralPage.openCategory();
+                    GeneralPage.openSubCategory();
                 }
             }
         }
@@ -104,7 +105,6 @@ public class TRegisteredOrder extends LoadTestCase
         {
             GeneralPage.executePaging();
             GeneralPage.openProductDetailsPage();
-        }
-        
+        }        
     }
 }

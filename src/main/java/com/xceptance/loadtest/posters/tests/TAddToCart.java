@@ -38,6 +38,7 @@ public class TAddToCart extends LoadTestCase
             // add to cart
             ProductDetailsPage.addToCart();
         }
+    	
     	GeneralPage.viewCart();
     }
 
@@ -67,7 +68,7 @@ public class TAddToCart extends LoadTestCase
                 }
                 else
                 {
-                    GeneralPage.openCategory();
+                    GeneralPage.openSubCategory();
                 }
             }
         }
@@ -79,7 +80,6 @@ public class TAddToCart extends LoadTestCase
         {
             GeneralPage.executePaging();
             GeneralPage.openProductDetailsPage();
-        }
-        
+        }        
     }
 }

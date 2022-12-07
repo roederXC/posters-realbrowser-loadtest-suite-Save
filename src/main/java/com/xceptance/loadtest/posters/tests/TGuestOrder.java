@@ -45,6 +45,7 @@ public class TGuestOrder extends LoadTestCase
     	CartPage.proceedToCheckout();
     	
     	Context.get().data.attachAccount();
+    	
     	CheckoutPage.fillShippingForm();
     	CheckoutPage.fillPaymentForm();
     	CheckoutPage.placeOrder();    	
@@ -76,7 +77,7 @@ public class TGuestOrder extends LoadTestCase
                 }
                 else
                 {
-                    GeneralPage.openCategory();
+                    GeneralPage.openSubCategory();
                 }
             }
         }
@@ -88,7 +89,6 @@ public class TGuestOrder extends LoadTestCase
         {
             GeneralPage.executePaging();
             GeneralPage.openProductDetailsPage();
-        }
-        
+        }        
     }
 }

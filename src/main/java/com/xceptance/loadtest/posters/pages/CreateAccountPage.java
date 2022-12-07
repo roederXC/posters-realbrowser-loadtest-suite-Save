@@ -30,9 +30,7 @@ public class CreateAccountPage
             $("#firstName").should(visible).sendKeys(account.firstname);
             $("#eMail").should(visible).sendKeys(account.email);
             $("#password").should(visible).sendKeys(account.password);
-            $("#passwordAgain").should(visible).sendKeys(account.password);
-                        
-            
+            $("#passwordAgain").should(visible).sendKeys(account.password);   
         });       
     }
         

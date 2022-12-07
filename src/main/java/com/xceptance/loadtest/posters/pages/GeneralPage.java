@@ -47,7 +47,7 @@ public class GeneralPage
 	    });
 	}
 	
-	public static void openCategory()
+	public static void openSubCategory()
 	{
 	    Action.run("OpenCategory", () ->
 	    {
