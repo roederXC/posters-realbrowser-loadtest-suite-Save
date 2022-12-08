@@ -31,9 +31,15 @@ public class CheckoutPage
             $("#city").should(visible).sendKeys(address.city);
             $("#state").should(visible).sendKeys(address.state);
             $("#zip").should(visible).sendKeys(address.zip);
-                        
-            $("#btnAddDelAddr").should(visible).click();
         });       
+    }
+    
+    public static void submitShipping()
+    {
+        Action.run("Shipping", () ->
+        {
+            $("#btnAddDelAddr").should(visible).click();
+        });
     }
     
     public static void fillPaymentForm()
@@ -46,10 +52,16 @@ public class CheckoutPage
             $("#creditCardNumber").should(visible).sendKeys(cc.number);
             $("#name").should(visible).sendKeys(account.firstname + " " + account.lastname);
             $("#expirationDateMonth").should(visible).sendKeys(cc.expirationMonth);
-            $("#expirationDateYear").should(visible).sendKeys(cc.expirationYear);         
-            
-            $("#btnAddPayment").should(visible).click();
+            $("#expirationDateYear").should(visible).sendKeys(cc.expirationYear);
         });       
+    }
+    
+    public static void submitBilling()
+    {
+        Action.run("SubmitShipping", () ->
+        {
+            $("#btnAddPayment").should(visible).click();
+        });
     }
     
     public static void placeOrder()
