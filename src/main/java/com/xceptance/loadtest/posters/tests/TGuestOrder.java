@@ -59,9 +59,6 @@ public class TGuestOrder extends LoadTestCase
             // value if this seems to fancy or stubborn or is not needed
             var data = FileDataSupplier.searchPhraseWithResult();
             GeneralPage.search(data.valueA, data.valueB);
-            
-            // view a product, this logic here expects that we have a product!
-            GeneralPage.openProductDetailsPage();
         }
         else
         {
@@ -88,7 +85,7 @@ public class TGuestOrder extends LoadTestCase
         for (int j = 0; j < refineRounds; j++)
         {
             GeneralPage.executePaging();
-            GeneralPage.openProductDetailsPage();
+            GeneralPage.openProductDetailsPage();          
         }        
     }
 }

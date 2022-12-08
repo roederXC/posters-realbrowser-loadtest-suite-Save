@@ -23,6 +23,7 @@ public class TAddToCart extends LoadTestCase
     	
     	int targetItemCount = Context.configuration().addToCartCount.value;
     	final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);
+    	
     	while (Context.get().data.totalAddToCartCount < targetItemCount)
         {
             // Check if the maximum number of attempts is reached
@@ -48,9 +49,6 @@ public class TAddToCart extends LoadTestCase
             // value if this seems to fancy or stubborn or is not needed
             var data = FileDataSupplier.searchPhraseWithResult();
             GeneralPage.search(data.valueA, data.valueB);
-            
-            // view a product, this logic here expects that we have a product!
-            GeneralPage.openProductDetailsPage();
         }
         else
         {
