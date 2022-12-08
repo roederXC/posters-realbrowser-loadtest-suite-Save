@@ -78,7 +78,7 @@ public class TRegisteredCheckout extends LoadTestCase
         else
         {
             // get us a category context
-            final int categoryRounds = Context.configuration().browseCategoriesFlow.value;
+            final int categoryRounds = Context.configuration().browseCategoriesFlow.random();
 
             for (int j = 0; j < categoryRounds; j++)
             {
@@ -94,15 +94,15 @@ public class TRegisteredCheckout extends LoadTestCase
             }
         }
         
-        // browse the page
-        final int refineRounds = Context.configuration().browseRefineFlow.value;
+        // paging on Product Listing Pages
+        final int pagingRounds = Context.configuration().browsePagingFlow.random();
 
-        for (int j = 0; j < refineRounds; j++)
+        for (int j = 0; j < pagingRounds; j++)
         {
             GeneralPage.executePaging();
-        }      
+        }        
         
-        // open a ProductDetailPage
+        // open a Product Detail page
         GeneralPage.openProductDetailsPage();
     }
 }

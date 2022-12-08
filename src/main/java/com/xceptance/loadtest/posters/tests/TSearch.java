@@ -1,6 +1,7 @@
 package com.xceptance.loadtest.posters.tests;
 
 import com.xceptance.loadtest.api.tests.LoadTestCase;
+import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.data.FileDataSupplier;
 import com.xceptance.loadtest.posters.pages.GeneralPage;
 import com.xceptance.loadtest.posters.pages.Homepage;
@@ -22,7 +23,15 @@ public class TSearch extends LoadTestCase
     	var data = FileDataSupplier.searchPhraseWithResult();
     	GeneralPage.search(data.valueA, data.valueB);
     	
-    	// view a product, this logic here expects that we have a product!
-    	GeneralPage.openProductDetailsPage();
+    	// paging on Product Listing Pages
+        final int pagingRounds = Context.configuration().browsePagingFlow.random();
+
+        for (int j = 0; j < pagingRounds; j++)
+        {
+            GeneralPage.executePaging();
+        }        
+        
+        // open a Product Detail page
+        GeneralPage.openProductDetailsPage();
     }
 }

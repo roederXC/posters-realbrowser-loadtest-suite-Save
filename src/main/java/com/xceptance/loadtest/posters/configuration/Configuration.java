@@ -148,12 +148,12 @@ public class Configuration
     public ConfigRange fullBrowseFlow;
 
     // How often do we need the categories touched per browsing flow before refining
-    @Property(key = "browsing.flow.categories.flow")
+    @Property(key = "browsing.flow.categories.flow", immutable = false)
     public ConfigRange browseCategoriesFlow;
 
-    // How often do we refine within the larger browse flow per round
-    @Property(key = "browsing.flow.refine.flow")
-    public ConfigRange browseRefineFlow;
+    // How often do we page within the larger browse flow per round
+    @Property(key = "browsing.flow.paging.flow", immutable = false)
+    public ConfigRange browsePagingFlow;
 
     // Top category browsing probability
     @Property(key = "browsing.category.top", immutable = false)
