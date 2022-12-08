@@ -36,7 +36,7 @@ public class TBrowse extends LoadTestCase
                 }
             }
             
-            // paging on Product Listing Pages
+            // paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
             final int pagingRounds = Context.configuration().browsePagingFlow.random();
 
             for (int j = 0; j < pagingRounds; j++)

@@ -11,10 +11,9 @@ import com.xceptance.loadtest.posters.pages.Homepage;
 public class TAccountCreation extends LoadTestCase
 {
 	/**
-	 * Open the landing page, browse the catalog. If there's a result grid open a random product's detail view.
-	 * @throws FlowStoppedException 
+	 * Open the landing page, go to account creation and create a new account
 	 */
-    public void test() throws FlowStoppedException
+    public void test()
     {
         // Flag test case
         Context.requiresRegisteredAccount(true);
