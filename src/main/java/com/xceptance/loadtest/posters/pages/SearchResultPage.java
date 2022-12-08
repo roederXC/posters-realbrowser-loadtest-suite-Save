@@ -1,11 +1,7 @@
 package com.xceptance.loadtest.posters.pages;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$;
 
-import com.codeborne.selenide.Selenide;
-import com.xceptance.loadtest.api.util.Action;
-import com.xceptance.loadtest.api.util.Context;
+import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Does things on a search result page
@@ -14,7 +10,7 @@ import com.xceptance.loadtest.api.util.Context;
  *
  */
 public class SearchResultPage 
-{
+{    
 	/**
 	 * Check that the homepage is correct. This activity has to be in the action to get the failure
 	 * properly reported later on in case this verification fails.
@@ -27,10 +23,7 @@ public class SearchResultPage
 	{
 		// check header
 		$("#globalNavigation").exists();
-		
-		// mini cart must be 0
-		$(".headerCartProductCount").should(exactText("0"));
-		
+				
 		// check footer
 		$("#footer").exists();
 	}
