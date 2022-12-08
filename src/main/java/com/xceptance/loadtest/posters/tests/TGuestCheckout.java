@@ -10,8 +10,6 @@ import com.xceptance.loadtest.posters.pages.CheckoutPage;
 import com.xceptance.loadtest.posters.pages.GeneralPage;
 import com.xceptance.loadtest.posters.pages.Homepage;
 import com.xceptance.loadtest.posters.pages.ProductDetailsPage;
-import com.xceptance.loadtest.posters.pages.SearchResultPage;
-
 
 public class TGuestCheckout extends LoadTestCase
 {
@@ -46,7 +44,9 @@ public class TGuestCheckout extends LoadTestCase
     	
     	Context.get().data.attachAccount();
     	CheckoutPage.fillShippingForm();
+    	CheckoutPage.submitShipping();
     	CheckoutPage.fillPaymentForm();
+    	CheckoutPage.submitBilling();
     	CheckoutPage.placeOrder();    	
     }
 
@@ -60,7 +60,7 @@ public class TGuestCheckout extends LoadTestCase
             GeneralPage.search(data.valueA, data.valueB);
             
             // view a product, this logic here expects that we have a product!
-            SearchResultPage.pdp();
+            GeneralPage.openProductDetailsPage();
         }
         else
         {
