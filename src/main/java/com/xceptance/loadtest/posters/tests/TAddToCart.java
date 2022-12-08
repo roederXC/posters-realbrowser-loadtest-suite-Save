@@ -8,8 +8,6 @@ import com.xceptance.loadtest.posters.data.FileDataSupplier;
 import com.xceptance.loadtest.posters.pages.GeneralPage;
 import com.xceptance.loadtest.posters.pages.Homepage;
 import com.xceptance.loadtest.posters.pages.ProductDetailsPage;
-import com.xceptance.loadtest.posters.pages.SearchResultPage;
-
 
 public class TAddToCart extends LoadTestCase
 {
@@ -52,7 +50,7 @@ public class TAddToCart extends LoadTestCase
             GeneralPage.search(data.valueA, data.valueB);
             
             // view a product, this logic here expects that we have a product!
-            SearchResultPage.pdp();
+            GeneralPage.openProductDetailsPage();
         }
         else
         {
