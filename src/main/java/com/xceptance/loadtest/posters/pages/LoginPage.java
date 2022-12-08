@@ -12,6 +12,12 @@ import com.xceptance.loadtest.api.util.Context;
  */
 public class LoginPage 
 {
+    public static void validate()
+    {
+        $("#formLogin").should(exist);
+        $("#btnSignIn").should(exist);
+    }
+    
     public static void fillAccountForm()
     {
         Action.run("FillLoginForm", () ->

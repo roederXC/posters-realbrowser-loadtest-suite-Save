@@ -4,12 +4,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 import org.junit.Assert;
 
-import static com.codeborne.selenide.CollectionCondition .*;
 import static com.codeborne.selenide.Condition .*;
-
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.xlt.api.util.XltRandom;
@@ -20,6 +16,12 @@ import com.xceptance.xlt.api.util.XltRandom;
  */
 public class ProductDetailsPage 
 {
+    public static void validate()
+    {
+        $("#addToCartForm").should(exist);
+        $("#titleProductName").should(exist);
+    }
+    
 	public static void addToCart()
 	{
 	    Action.run("AddToCart", () ->
@@ -64,6 +66,5 @@ public class ProductDetailsPage
 	            }
 	        });
 	    }
-	}	
-	
+	}		
 }
