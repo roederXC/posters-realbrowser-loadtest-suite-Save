@@ -21,7 +21,7 @@ public class TBrowse extends LoadTestCase
 
         for (int i = 0; i < rounds; i++)
         {
-            final int categoryRounds = Context.configuration().browseCategoriesFlow.value;
+            final int categoryRounds = Context.configuration().browseCategoriesFlow.random();
 
             for (int j = 0; j < categoryRounds; j++)
             {
@@ -36,13 +36,16 @@ public class TBrowse extends LoadTestCase
                 }
             }
             
-            final int refineRounds = Context.configuration().browseRefineFlow.value;
+            // paging on Product Listing Pages
+            final int pagingRounds = Context.configuration().browsePagingFlow.random();
 
-            for (int j = 0; j < refineRounds; j++)
+            for (int j = 0; j < pagingRounds; j++)
             {
                 GeneralPage.executePaging();
-                GeneralPage.openProductDetailsPage();
-            }
+            }        
+            
+            // open a Product Detail page
+            GeneralPage.openProductDetailsPage();
         }
     }
 }

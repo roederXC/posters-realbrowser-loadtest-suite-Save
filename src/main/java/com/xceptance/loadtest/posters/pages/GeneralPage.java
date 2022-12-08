@@ -82,7 +82,7 @@ public class GeneralPage
     public static void executePaging()
     {
         ElementsCollection pagingLinks = $$("#pagination-bottom li:not(.active)>a").filterBy(visible);
-        if(Context.configuration().displayMoreProbability.random() && !pagingLinks.isEmpty())
+        if(!pagingLinks.isEmpty())
         {
             Action.run("Paging", () ->
             {
