@@ -3,7 +3,6 @@ package com.xceptance.loadtest.posters.pages;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.CollectionCondition .*;
 import static com.codeborne.selenide.Condition .*;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -97,7 +96,8 @@ public class GeneralPage
             $("#headerCartOverview").should(visible).hover();
             $("#miniCartMenu .btn-primary").should(visible).hover().click();
             
-            $("#cartOverviewTable").should(visible);
+            // check if we are on the cart page
+            CartPage.validate();
         });        
     }
     
@@ -110,8 +110,8 @@ public class GeneralPage
             $("#showUserMenu").should(visible).hover();
             $("#userMenu .goToRegistration").should(visible).click();
             
-            // verify register page
-            $("#btnRegister").should(exist);
+            // check if we are on the create account page
+            CreateAccountPage.validate();
         });
     }
 }

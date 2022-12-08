@@ -1,21 +1,12 @@
 package com.xceptance.loadtest.posters.pages;
 
 import static com.codeborne.selenide.Selenide.*;
-
-import java.util.Optional;
-
-import static com.codeborne.selenide.CollectionCondition .*;
 import static com.codeborne.selenide.Condition .*;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.data.Account;
 import com.xceptance.loadtest.api.data.Address;
 import com.xceptance.loadtest.api.data.CreditCard;
 import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.Context;
-import com.xceptance.xlt.api.util.XltRandom;
 
 /**
  * 
@@ -23,6 +14,11 @@ import com.xceptance.xlt.api.util.XltRandom;
  */
 public class CheckoutPage 
 {
+    public static void validate()
+    {
+        $("#titleDelAddr").should(exist);
+    }
+    
     public static void fillShippingForm()
     {
         Action.run("Shipping", () ->
