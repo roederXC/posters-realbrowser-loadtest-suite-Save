@@ -4,7 +4,6 @@ import com.xceptance.loadtest.api.tests.LoadTestCase;
 import com.xceptance.loadtest.posters.data.FileDataSupplier;
 import com.xceptance.loadtest.posters.pages.GeneralPage;
 import com.xceptance.loadtest.posters.pages.Homepage;
-import com.xceptance.loadtest.posters.pages.SearchResultPage;
 
 public class TSearch extends LoadTestCase
 {
@@ -24,6 +23,6 @@ public class TSearch extends LoadTestCase
     	GeneralPage.search(data.valueA, data.valueB);
     	
     	// view a product, this logic here expects that we have a product!
-    	SearchResultPage.pdp();
+    	GeneralPage.openProductDetailsPage();
     }
 }
