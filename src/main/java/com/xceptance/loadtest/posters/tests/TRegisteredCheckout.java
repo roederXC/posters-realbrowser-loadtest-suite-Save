@@ -12,8 +12,6 @@ import com.xceptance.loadtest.posters.pages.GeneralPage;
 import com.xceptance.loadtest.posters.pages.Homepage;
 import com.xceptance.loadtest.posters.pages.LoginPage;
 import com.xceptance.loadtest.posters.pages.ProductDetailsPage;
-import com.xceptance.loadtest.posters.pages.SearchResultPage;
-
 
 public class TRegisteredCheckout extends LoadTestCase
 {
@@ -73,10 +71,7 @@ public class TRegisteredCheckout extends LoadTestCase
             // search, get some data first, feel free to replace the Tuple approach for the return 
             // value if this seems to fancy or stubborn or is not needed
             var data = FileDataSupplier.searchPhraseWithResult();
-            GeneralPage.search(data.valueA, data.valueB);
-            
-            // view a product, this logic here expects that we have a product!
-            SearchResultPage.pdp();
+            GeneralPage.search(data.valueA, data.valueB);            
         }
         else
         {
@@ -103,8 +98,12 @@ public class TRegisteredCheckout extends LoadTestCase
         for (int j = 0; j < refineRounds; j++)
         {
             GeneralPage.executePaging();
-            GeneralPage.openProductDetailsPage();
-        }
+        }      
         
+        // open a ProductDetailPage
+        GeneralPage.openProductDetailsPage();
+        
+        // Check if we are on a ProductDetailPage
+        ProductDetailsPage.validate();
     }
 }
