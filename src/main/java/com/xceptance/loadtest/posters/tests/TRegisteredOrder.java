@@ -16,7 +16,8 @@ import com.xceptance.loadtest.posters.pages.ProductDetailsPage;
 public class TRegisteredOrder extends LoadTestCase
 {
 	/**
-	 * Open the landing page, browse the catalog. If there's a result grid open a random product's detail view.
+	 * Open the landing page, register a new account. Browse or search the catalog. If there's a result grid open a random product's detail view,
+     * configure it and put it in the cart. Go to the checkout, enter shipping and billing and place the order.
 	 * @throws FlowStoppedException 
 	 */
     public void test() throws FlowStoppedException
@@ -95,7 +96,7 @@ public class TRegisteredOrder extends LoadTestCase
             }
         }
         
-        // paging on Product Listing Pages
+        // paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
         final int pagingRounds = Context.configuration().browsePagingFlow.random();
 
         for (int j = 0; j < pagingRounds; j++)

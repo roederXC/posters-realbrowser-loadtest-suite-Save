@@ -14,7 +14,8 @@ import com.xceptance.loadtest.posters.pages.ProductDetailsPage;
 public class TGuestCheckout extends LoadTestCase
 {
 	/**
-	 * Open the landing page, browse the catalog. If there's a result grid open a random product's detail view.
+	 * Open the landing page, browse or search the catalog. If there's a result grid open a random product's detail view,
+	 * configure it and put it in the cart. Go to the checkout, enter shipping and billing.
 	 * @throws FlowStoppedException 
 	 */
     public void test() throws FlowStoppedException
@@ -46,8 +47,7 @@ public class TGuestCheckout extends LoadTestCase
     	CheckoutPage.fillShippingForm();
     	CheckoutPage.submitShipping();
     	CheckoutPage.fillPaymentForm();
-    	CheckoutPage.submitBilling();
-    	CheckoutPage.placeOrder();    	
+    	CheckoutPage.submitBilling();    	
     }
 
     private void searchOrBrowse()
@@ -78,7 +78,7 @@ public class TGuestCheckout extends LoadTestCase
             }
         }
         
-        // paging on Product Listing Pages
+        // paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
         final int pagingRounds = Context.configuration().browsePagingFlow.random();
 
         for (int j = 0; j < pagingRounds; j++)
