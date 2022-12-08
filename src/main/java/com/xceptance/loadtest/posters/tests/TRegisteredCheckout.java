@@ -61,7 +61,9 @@ public class TRegisteredCheckout extends LoadTestCase
     	CartPage.proceedToCheckout();
     	
     	CheckoutPage.fillShippingForm();
-    	CheckoutPage.fillPaymentForm();  	
+        CheckoutPage.submitShipping();
+        CheckoutPage.fillPaymentForm();
+        CheckoutPage.submitBilling(); 	
     }
 
     private void searchOrBrowse()
