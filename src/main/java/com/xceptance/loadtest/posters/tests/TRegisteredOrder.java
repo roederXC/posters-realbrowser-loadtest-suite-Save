@@ -75,9 +75,6 @@ public class TRegisteredOrder extends LoadTestCase
             // value if this seems to fancy or stubborn or is not needed
             var data = FileDataSupplier.searchPhraseWithResult();
             GeneralPage.search(data.valueA, data.valueB);
-            
-            // view a product, this logic here expects that we have a product!
-            GeneralPage.openProductDetailsPage();
         }
         else
         {

@@ -77,6 +77,9 @@ public class GeneralPage
             ElementsCollection productLinks = $$("#productOverview a").filterBy(visible).as("Products").shouldBe(sizeGreaterThan(0));
             productLinks.get(XltRandom.nextInt(0, productLinks.size()-1)).click();           
         });
+        
+        // Check if we are on a ProductDetailPage
+        ProductDetailsPage.validate();
     }
 
     public static void executePaging()

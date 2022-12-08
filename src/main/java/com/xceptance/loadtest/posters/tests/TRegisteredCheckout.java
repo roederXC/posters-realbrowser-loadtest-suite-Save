@@ -104,8 +104,5 @@ public class TRegisteredCheckout extends LoadTestCase
         
         // open a ProductDetailPage
         GeneralPage.openProductDetailsPage();
-        
-        // Check if we are on a ProductDetailPage
-        ProductDetailsPage.validate();
     }
 }
