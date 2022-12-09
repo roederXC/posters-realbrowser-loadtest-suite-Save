@@ -10,6 +10,9 @@ public class FileDataSupplier
 {
     /**
      * Get us some search data with expected counts
+     * @return Tuple with: 
+     * <br> - valueA = search phrase 
+     * <br> - valueB = expected item count
      */
     public static Tuple<String, String> searchPhraseWithResult()
     {
