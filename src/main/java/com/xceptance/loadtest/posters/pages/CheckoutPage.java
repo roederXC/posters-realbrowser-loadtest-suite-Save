@@ -14,9 +14,25 @@ import com.xceptance.loadtest.api.util.Context;
  */
 public class CheckoutPage 
 {
-    public static void validate()
+    public static void validateShippingPage()
     {
         $("#titleDelAddr").should(exist);
+        $("#formAddDelAddr").should(exist);
+        $("#btnAddDelAddr").should(exist);
+    }
+    
+    public static void validatePaymentPage()
+    {
+        $("#titlePayment").should(exist);
+        $("#formAddPayment").should(exist);
+        $("#btnAddPayment").should(exist);
+    }
+    
+    public static void validateOrderReviewPage()
+    {
+        $("#titleOrderOverview").should(exist);
+        $("#checkoutOverviewTable").should(exist);
+        $("#btnOrder").should(exist);
     }
     
     public static void fillShippingForm()
@@ -39,6 +55,8 @@ public class CheckoutPage
         Action.run("Shipping", () ->
         {
             $("#btnAddDelAddr").should(visible).click();
+            
+            validatePaymentPage();
         });
     }
     
@@ -61,6 +79,8 @@ public class CheckoutPage
         Action.run("SubmitShipping", () ->
         {
             $("#btnAddPayment").should(visible).click();
+            
+            validateOrderReviewPage();
         });
     }
     
@@ -69,6 +89,10 @@ public class CheckoutPage
         Action.run("PlaceOrder", () ->
         {       
             $("#btnOrder").scrollIntoView(false).should(visible).click();
+            
+            // validate that order has been placed successfully
+            $("#successMessage").should(visible).shouldHave(text("Thank you"));
+            Homepage.verify();
         });       
     }
 }
