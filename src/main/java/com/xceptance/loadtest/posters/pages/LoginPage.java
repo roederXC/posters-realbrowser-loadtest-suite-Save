@@ -37,7 +37,7 @@ public class LoginPage
             
             // verify success page
             $("#successMessage").should(visible).shouldHave(text("Login successful"));
-            Homepage.verify();
+            Homepage.validate();
         });       
     }
 }

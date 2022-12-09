@@ -2,7 +2,6 @@ package com.xceptance.loadtest.posters.pages;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
-
 import com.codeborne.selenide.Selenide;
 import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.Context;
@@ -43,7 +42,7 @@ public class Homepage
 				// Reopen home page to avoid JS security issue with credentials in URL
 				Action.run(NAME, () -> {
 					Selenide.open(siteUrl);
-					verify();
+					validate();
 				});
 			}
 			else
@@ -52,7 +51,7 @@ public class Homepage
 				Action.run(NAME + "_Auth", () -> 
 				{
 					Selenide.open(siteUrl, "", siteUsername, sitePassword);
-					verify();
+					validate();
 				});
 			}
 		}
@@ -67,7 +66,7 @@ public class Homepage
 			// Reopen home page to avoid JS security issue with credentials in URL
 			Action.run(NAME, () -> {
 				Selenide.open(siteUrl);
-				verify();
+				validate();
 			});
 		}
 	}	
@@ -80,7 +79,7 @@ public class Homepage
 	 * Every check requires cpu and memory, the more checks, the less scale you get out of a single node
 	 * in terms of concurrent users. Experiment with that.
 	 */
-	public static void verify()
+	public static void validate()
 	{
 		// check header
 		$("#globalNavigation").exists();

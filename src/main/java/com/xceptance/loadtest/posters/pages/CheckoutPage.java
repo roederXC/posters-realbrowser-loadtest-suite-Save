@@ -10,7 +10,7 @@ import com.xceptance.loadtest.api.util.Context;
 
 /**
  * 
- * @author rschwietzke
+ * @author roederXC (Xceptance Software Technologies GmbH)
  */
 public class CheckoutPage 
 {
@@ -92,7 +92,7 @@ public class CheckoutPage
             
             // validate that order has been placed successfully
             $("#successMessage").should(visible).shouldHave(text("Thank you"));
-            Homepage.verify();
+            Homepage.validate();
         });       
     }
 }
