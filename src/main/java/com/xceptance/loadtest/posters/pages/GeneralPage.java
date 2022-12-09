@@ -5,18 +5,17 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-
+import org.junit.Assert;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.RandomUtils;
-import com.xceptance.xlt.api.util.XltRandom;
 
 /**
- * Contains everything doable on all page types.
+ * Contains everything doable on most page types.
  * 
- * @author rschwietzke
+ * @author roederXC (Xceptance Software Technologies GmbH)
  */
 public class GeneralPage 
 {
@@ -41,7 +40,7 @@ public class GeneralPage
         {
             // click random top category link
             final ElementsCollection categoryLinks = getTopCategories();
-            final SelenideElement randomCatagory = categoryLinks.get(XltRandom.nextInt(0, categoryLinks.size()-1));
+            final SelenideElement randomCatagory = RandomUtils.randomEntry(categoryLinks);
             randomCatagory.click();
 
             // verify category page
@@ -55,9 +54,9 @@ public class GeneralPage
         {
             // click random category link
             final ElementsCollection topCategories = getTopCategories();
-            final SelenideElement randomTopCategory = topCategories.get(XltRandom.nextInt(0, topCategories.size()-1)).hover();
+            final SelenideElement randomTopCategory = RandomUtils.randomEntry(topCategories).hover();
             final ElementsCollection categoryLinks = randomTopCategory.$$("ul.dropdown-menu a").filterBy(visible).as("CategoryLinks").shouldBe(sizeGreaterThan(0));
-            final SelenideElement randomCatagory = categoryLinks.get(XltRandom.nextInt(0, categoryLinks.size()-1));
+            final SelenideElement randomCatagory = RandomUtils.randomEntry(categoryLinks);
             randomCatagory.click();
 
             // verify category page
@@ -91,10 +90,15 @@ public class GeneralPage
         {
             Action.run("Paging", () ->
             {
+                // save the origin page number
+                int originPage = Integer.valueOf($("#pagination-bottom li.active").getText());
+                
                 final SelenideElement paginLink = RandomUtils.randomEntry(pagingLinks);
                 paginLink.click();
 
-                //TODO post validation?
+                // validation
+                int newPage = Integer.valueOf($("#pagination-bottom li.active").getText());
+                Assert.assertFalse("We did not checnged the Page", originPage != newPage);
             });           
         }       
     }

@@ -1,18 +1,17 @@
 package com.xceptance.loadtest.posters.pages;
 
 import static com.codeborne.selenide.Selenide.*;
-
 import org.junit.Assert;
-
 import static com.codeborne.selenide.Condition .*;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.Context;
-import com.xceptance.xlt.api.util.XltRandom;
+import com.xceptance.loadtest.api.util.RandomUtils;
 
 /**
  * 
- * @author rschwietzke
+ * @author roederXC
  */
 public class ProductDetailsPage 
 {
@@ -39,31 +38,27 @@ public class ProductDetailsPage
 	
 	public static void configureProductSize()
 	{
-	    if($("#selectSize").exists())
+	    ElementsCollection sizeOtions = $$("#selectSize > option").filter(visible);
+	    if(!sizeOtions.isEmpty())
 	    {
 	        Action.run("ConfigureProductSize", () ->
 	        {
-	            ElementsCollection sizeOtions = $$("#selectSize > option").filter(visible);
-	            
-	            if(sizeOtions.size() > 1)
-	            {
-	                sizeOtions.get(XltRandom.nextInt(1, sizeOtions.size()-1)).click();
-	            }
+	            final SelenideElement randomOption = RandomUtils.randomEntry(sizeOtions);
+	            randomOption.click();
 	        });
 	    }
 	}	
 	
 	public static void configureProductStyle()
 	{
-	    if($("#selectStyle input:not([checked])").exists())
+	    ElementsCollection styleOtions = $$("#selectStyle input:not([checked])").filter(visible);
+	    
+	    if(!styleOtions.isEmpty())
 	    {
 	        Action.run("ConfigureProductStyle", () ->
 	        {
-	            ElementsCollection styleOtions = $$("#selectStyle input:not([checked])").filter(visible);
-	            if(styleOtions.size() > 0)
-	            {
-	                styleOtions.get(XltRandom.nextInt(0, styleOtions.size()-1)).click();	                
-	            }
+	            final SelenideElement randomOption = RandomUtils.randomEntry(styleOtions);
+	            randomOption.click();	                
 	        });
 	    }
 	}		
