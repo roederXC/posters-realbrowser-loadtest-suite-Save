@@ -1,13 +1,16 @@
 package com.xceptance.loadtest.posters.pages;
 
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.CollectionCondition .*;
-import static com.codeborne.selenide.Condition .*;
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.util.Action;
-import com.xceptance.loadtest.api.util.Context;
+import com.xceptance.loadtest.api.util.RandomUtils;
 import com.xceptance.xlt.api.util.XltRandom;
 
 /**
@@ -17,53 +20,53 @@ import com.xceptance.xlt.api.util.XltRandom;
  */
 public class GeneralPage 
 {
-	public static void search(final String phrase, final String expectedCount)
-	{
-		Action.run("Search", () ->
-		{
-			// open search
-			$("#header-search-trigger").click();
+    public static void search(final String phrase, final String expectedCount)
+    {
+        Action.run("Search", () ->
+        {
+            // open search
+            $("#header-search-trigger").click();
 
-			// enter phrase
-			$("#searchForm input[name='searchText']").sendKeys(phrase);
+            // enter phrase
+            $("#searchForm input[name='searchText']").sendKeys(phrase);
 
-			// send search, this is our page load
-			$("#btnSearch").click();
+            // send search, this is our page load
+            $("#btnSearch").click();
 
-			// verify count
-			$("#totalProductCount").should(Condition.exactText(expectedCount));
-		});
-	}
-	
-	public static void openTopCategory()
-	{
-	    Action.run("OpenTopCategory", () ->
-	    {
-	        // click random top category link
-	        ElementsCollection categoryLinks = getTopCategories();
-	        SelenideElement randomCatagory = categoryLinks.get(XltRandom.nextInt(0, categoryLinks.size()-1));
-	        randomCatagory.click();
-	        
-	        // verify category page
-	        $("#titleCategoryName").should(exist);
-	    });
-	}
-	
-	public static void openSubCategory()
-	{
-	    Action.run("OpenCategory", () ->
-	    {
-	        // click random category link
-	        ElementsCollection topCategories = getTopCategories();
-	        SelenideElement randomTopCategory = topCategories.get(XltRandom.nextInt(0, topCategories.size()-1)).hover();
-	        ElementsCollection categoryLinks = randomTopCategory.$$("ul.dropdown-menu a").filterBy(visible).as("CategoryLinks").shouldBe(sizeGreaterThan(0));
-            SelenideElement randomCatagory = categoryLinks.get(XltRandom.nextInt(0, categoryLinks.size()-1));
-	        randomCatagory.click();
-	        
-	        // verify category page
-	        $("#titleCategoryName").should(exist);
-	    });
-	}
+            // verify count
+            $("#totalProductCount").should(Condition.exactText(expectedCount));
+        });
+    }
+
+    public static void openTopCategory()
+    {
+        Action.run("OpenTopCategory", () ->
+        {
+            // click random top category link
+            final ElementsCollection categoryLinks = getTopCategories();
+            final SelenideElement randomCatagory = categoryLinks.get(XltRandom.nextInt(0, categoryLinks.size()-1));
+            randomCatagory.click();
+
+            // verify category page
+            $("#titleCategoryName").should(exist);
+        });
+    }
+
+    public static void openSubCategory()
+    {
+        Action.run("OpenCategory", () ->
+        {
+            // click random category link
+            final ElementsCollection topCategories = getTopCategories();
+            final SelenideElement randomTopCategory = topCategories.get(XltRandom.nextInt(0, topCategories.size()-1)).hover();
+            final ElementsCollection categoryLinks = randomTopCategory.$$("ul.dropdown-menu a").filterBy(visible).as("CategoryLinks").shouldBe(sizeGreaterThan(0));
+            final SelenideElement randomCatagory = categoryLinks.get(XltRandom.nextInt(0, categoryLinks.size()-1));
+            randomCatagory.click();
+
+            // verify category page
+            $("#titleCategoryName").should(exist);
+        });
+    }
 
     private static ElementsCollection getTopCategories()
     {
@@ -74,23 +77,27 @@ public class GeneralPage
     {
         Action.run("OpenProduct", () ->
         {
-            ElementsCollection productLinks = $$("#productOverview a").filterBy(visible).as("Products").shouldBe(sizeGreaterThan(0));
-            productLinks.get(XltRandom.nextInt(0, productLinks.size()-1)).click();           
+            final ElementsCollection productLinks = $$("#productOverview a").filterBy(visible).as("Products").shouldBe(sizeGreaterThan(0));
+            final SelenideElement productLink = RandomUtils.randomEntry(productLinks);
+
+            productLink.click();
+
+            // Check if we are on a ProductDetailPage
+            ProductDetailsPage.validate();
         });
-        
-        // Check if we are on a ProductDetailPage
-        ProductDetailsPage.validate();
     }
 
     public static void executePaging()
     {
-        ElementsCollection pagingLinks = $$("#pagination-bottom li:not(.active)>a").filterBy(visible);
+        final ElementsCollection pagingLinks = $$("#pagination-bottom li:not(.active)>a").filterBy(visible);
         if(!pagingLinks.isEmpty())
         {
             Action.run("Paging", () ->
             {
-                pagingLinks.shouldBe(sizeGreaterThan(0));
-                pagingLinks.get(XltRandom.nextInt(0, pagingLinks.size()-1)).click();           
+                final SelenideElement paginLink = RandomUtils.randomEntry(pagingLinks);
+                paginLink.click();
+
+                //TODO post validation?
             });           
         }       
     }
@@ -101,21 +108,21 @@ public class GeneralPage
         {
             $("#headerCartOverview").should(visible).hover();
             $("#miniCartMenu .btn-primary").should(visible).hover().click();
-            
+
             // check if we are on the cart page
             CartPage.validate();
         });        
     }
-    
+
     public static void openCreateNewAccount()
     {
         Action.run("OpenCreateNewAccount", () ->
         {
             // click Create new Account
-            
+
             $("#showUserMenu").should(visible).hover();
             $("#userMenu .goToRegistration").should(visible).click();
-            
+
             // check if we are on the create account page
             CreateAccountPage.validate();
         });

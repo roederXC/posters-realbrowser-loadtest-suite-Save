@@ -11,34 +11,35 @@ import com.xceptance.loadtest.posters.pages.ProductDetailsPage;
 
 public class TAddToCart extends LoadTestCase
 {
-	/**
-	 * Open the landing page, browse the catalog. If there's a result grid open a random product's detail view.
-	 * @throws FlowStoppedException 
-	 */
+    /**
+     * Open the landing page, browse the catalog. If there's a result grid open a random product's detail view.
+     * @throws FlowStoppedException 
+     */
+    @Override
     public void test() throws FlowStoppedException
     {
-    	// loads the homepage, data needed is taking from the properties automatically
-    	// using the Context as well as the attached configuration.
-    	Homepage.open();
-    	
-    	int targetItemCount = Context.configuration().addToCartCount.value;
-    	final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);
-    	
-    	while (Context.get().data.totalAddToCartCount < targetItemCount)
+        // loads the homepage, data needed is taking from the properties automatically
+        // using the Context as well as the attached configuration.
+        Homepage.open();
+
+        final int targetItemCount = Context.configuration().addToCartCount.value;
+        final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);
+
+        while (Context.get().data.totalAddToCartCount < targetItemCount)
         {
             // Check if the maximum number of attempts is reached
             addToCartSafetyBreak.check("Unable to add the desired number of products to the cart.");
             searchOrBrowse();
-            
+
             // configure product
             ProductDetailsPage.configureProductSize();
             ProductDetailsPage.configureProductStyle();
-            
+
             // add to cart
             ProductDetailsPage.addToCart();
         }
-    	
-    	GeneralPage.viewCart();
+
+        GeneralPage.viewCart();
     }
 
     private void searchOrBrowse()
@@ -47,36 +48,30 @@ public class TAddToCart extends LoadTestCase
         {
             // search, get some data first, feel free to replace the Tuple approach for the return 
             // value if this seems to fancy or stubborn or is not needed
-            var data = FileDataSupplier.searchPhraseWithResult();
+            final var data = FileDataSupplier.searchPhraseWithResult();
             GeneralPage.search(data.valueA, data.valueB);            
         }
         else
         {
-            // get us a category context
-            final int categoryRounds = Context.configuration().browseCategoriesFlow.random();
-
-            for (int j = 0; j < categoryRounds; j++)
+            // browse main navigation
+            if(Context.get().configuration.topCategoryProbability.random())
             {
-                // work on categories
-                if(Context.get().configuration.topCategoryBrowsing.random())
-                {
-                    GeneralPage.openTopCategory();
-                }
-                else
-                {
-                    GeneralPage.openSubCategory();
-                }
+                GeneralPage.openTopCategory();
+            }
+            else
+            {
+                GeneralPage.openSubCategory();
             }
         }
-        
+
         // paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
-        final int pagingRounds = Context.configuration().browsePagingFlow.random();
+        final int pagingRounds = Context.configuration().pagingRounds.random();
 
         for (int j = 0; j < pagingRounds; j++)
         {
             GeneralPage.executePaging();
         }        
-        
+
         // open a Product Detail page
         GeneralPage.openProductDetailsPage();
     }
