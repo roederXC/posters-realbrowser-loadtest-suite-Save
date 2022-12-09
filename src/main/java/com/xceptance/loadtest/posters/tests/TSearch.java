@@ -1,5 +1,6 @@
 package com.xceptance.loadtest.posters.tests;
 
+import com.xceptance.loadtest.api.data.Tuple;
 import com.xceptance.loadtest.api.tests.LoadTestCase;
 import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.data.FileDataSupplier;
@@ -20,7 +21,7 @@ public class TSearch extends LoadTestCase
     	
     	// search, get some data first, feel free to replace the Tuple approach for the return 
     	// value if this seems to fancy or stubborn or is not needed
-    	var data = FileDataSupplier.searchPhraseWithResult();
+    	Tuple<String,String> data = FileDataSupplier.searchPhraseWithResult();
     	GeneralPage.search(data.valueA, data.valueB);
     	
     	// paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
