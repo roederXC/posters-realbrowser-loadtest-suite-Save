@@ -98,7 +98,7 @@ public class GeneralPage
 
                 // validation
                 int newPage = Integer.valueOf($("#pagination-bottom li.active").getText());
-                Assert.assertFalse("We did not checnged the Page", originPage != newPage);
+                Assert.assertFalse("We did not changed the Page", originPage == newPage);
             });           
         }       
     }
