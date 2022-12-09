@@ -17,16 +17,16 @@ public class TBrowse extends LoadTestCase
     	Homepage.open();
     	
     	// Determine how often we want to decent from the top categories into the catalog
-        final int rounds = Context.configuration().fullBrowseFlow.value;
+        final int rounds = Context.configuration().browsingRounds.value;
 
         for (int i = 0; i < rounds; i++)
         {
-            final int categoryRounds = Context.configuration().browseCategoriesFlow.random();
+            final int categoryRounds = Context.configuration().browseCategoriesRounds.random();
 
             for (int j = 0; j < categoryRounds; j++)
             {
                 // work on categories
-                if(Context.get().configuration.topCategoryBrowsing.random())
+                if(Context.get().configuration.topCategoryProbability.random())
                 {
                     GeneralPage.openTopCategory();
                 }
@@ -37,7 +37,7 @@ public class TBrowse extends LoadTestCase
             }
             
             // paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
-            final int pagingRounds = Context.configuration().browsePagingFlow.random();
+            final int pagingRounds = Context.configuration().pagingRounds.random();
 
             for (int j = 0; j < pagingRounds; j++)
             {
