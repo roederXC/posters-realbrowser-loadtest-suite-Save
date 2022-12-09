@@ -22,7 +22,7 @@ public class CartPage
             $("#btnStartCheckout").should(visible).click();
             
             // check if we are on the checkout page
-            CheckoutPage.validate();
+            CheckoutPage.validateShippingPage();
         });
     }
 }
