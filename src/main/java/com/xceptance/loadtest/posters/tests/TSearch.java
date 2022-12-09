@@ -25,7 +25,7 @@ public class TSearch extends LoadTestCase
     	GeneralPage.search(data.valueA, data.valueB);
     	
     	// paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
-        final int pagingRounds = Context.configuration().browsePagingFlow.random();
+        final int pagingRounds = Context.configuration().pagingRounds.random();
 
         for (int j = 0; j < pagingRounds; j++)
         {

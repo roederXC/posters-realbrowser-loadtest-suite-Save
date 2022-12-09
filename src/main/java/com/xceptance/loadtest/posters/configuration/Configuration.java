@@ -144,8 +144,12 @@ public class Configuration
     // Browsing
 
     // How often do we want to walk the catalog path from the top
-    @Property(key = "browsing.flow")
-    public ConfigRange fullBrowseFlow;
+    @Property(key = "browsing.rounds")
+    public ConfigRange browsingRounds;
+    
+    // How often do we need the categories touched per browsing flow before refining
+    @Property(key = "browsing.categoryRounds", immutable = false)
+    public ConfigRange browseCategoriesRounds;
 
     // How often do we page within the larger browse flow per round
     @Property(key = "browsing.pagingRounds", immutable = false)
