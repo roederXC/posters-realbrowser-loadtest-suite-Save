@@ -5,6 +5,7 @@ import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.api.util.FlowStoppedException;
 import com.xceptance.loadtest.api.util.SafetyBreak;
 import com.xceptance.loadtest.posters.data.FileDataSupplier;
+import com.xceptance.loadtest.posters.flows.SearchOrBrowseFlow;
 import com.xceptance.loadtest.posters.pages.CartPage;
 import com.xceptance.loadtest.posters.pages.CheckoutPage;
 import com.xceptance.loadtest.posters.pages.CreateAccountPage;
@@ -47,7 +48,9 @@ public class TRegisteredOrder extends LoadTestCase
         {
             // Check if the maximum number of attempts is reached
             addToCartSafetyBreak.check("Unable to add the desired number of products to the cart.");
-            searchOrBrowse();
+            
+            // do a search or a browse and open a random product
+            new SearchOrBrowseFlow().run();
             
             // configure product
             ProductDetailsPage.configureProductSize();
