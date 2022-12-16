@@ -2,7 +2,6 @@ package com.xceptance.loadtest.posters.tests;
 
 import com.xceptance.loadtest.api.tests.LoadTestCase;
 import com.xceptance.loadtest.api.util.Context;
-import com.xceptance.loadtest.api.util.FlowStoppedException;
 import com.xceptance.loadtest.posters.pages.CreateAccountPage;
 import com.xceptance.loadtest.posters.pages.GeneralPage;
 import com.xceptance.loadtest.posters.pages.Homepage;
