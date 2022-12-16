@@ -35,9 +35,10 @@ public class LoginPage
         {       
             $("#btnSignIn").should(visible).click();
             
-            // verify success page
-            $("#successMessage").should(visible).shouldHave(text("Login successful"));
-            Homepage.validate();
         });       
+        
+        // verify success message and homepage
+        $("#successMessage").should(visible).shouldHave(text("Login successful"));
+        Homepage.validate();
     }
 }

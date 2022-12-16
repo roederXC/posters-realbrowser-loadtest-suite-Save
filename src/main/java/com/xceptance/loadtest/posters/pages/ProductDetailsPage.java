@@ -27,17 +27,19 @@ public class ProductDetailsPage
     
 	public static void addToCart()
 	{
+	    // get the current quantity. We need this later for validation
+	    int previousQty = Integer.valueOf($(".headerCartProductCount").should(visible).getText());
+
 	    Action.run("AddToCart", () ->
 	    {
-	        int previousQty = Integer.valueOf($(".headerCartProductCount").should(visible).getText());
 	        $("#btnAddToCart").should(exist).should(visible).should(enabled).click();
-	        
-	        // validate
-	        $(".cartMini").should(visible);
-	        int currentQty = Integer.valueOf($(".headerCartProductCount").should(visible).getText());	        
-	        Assert.assertTrue("Cart quantity did not increased", currentQty > previousQty);
-	        Context.get().data.totalAddToCartCount++;
 	    });
+	    
+	    // validate
+	    $(".cartMini").should(visible);
+	    int currentQty = Integer.valueOf($(".headerCartProductCount").should(visible).getText());	        
+	    Assert.assertTrue("Cart quantity did not increased", currentQty > previousQty);
+	    Context.get().data.totalAddToCartCount++;
 	}
 	
 	public static void configureProductSize()

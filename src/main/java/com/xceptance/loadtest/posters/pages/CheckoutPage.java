@@ -55,9 +55,9 @@ public class CheckoutPage
         Action.run("Shipping", () ->
         {
             $("#btnAddDelAddr").should(visible).click();
-            
-            validatePaymentPage();
         });
+        
+        validatePaymentPage();
     }
     
     public static void fillPaymentForm()
@@ -79,9 +79,9 @@ public class CheckoutPage
         Action.run("SubmitShipping", () ->
         {
             $("#btnAddPayment").should(visible).click();
-            
-            validateOrderReviewPage();
         });
+        
+        validateOrderReviewPage();
     }
     
     public static void placeOrder()
@@ -89,10 +89,10 @@ public class CheckoutPage
         Action.run("PlaceOrder", () ->
         {       
             $("#btnOrder").scrollIntoView(false).should(visible).click();
-            
-            // validate that order has been placed successfully
-            $("#successMessage").should(visible).shouldHave(text("Thank you"));
-            Homepage.validate();
         });       
+        
+        // validate that order has been placed successfully
+        $("#successMessage").should(visible).shouldHave(text("Thank you"));
+        Homepage.validate();
     }
 }

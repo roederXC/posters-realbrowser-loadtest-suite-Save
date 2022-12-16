@@ -42,8 +42,9 @@ public class Homepage
 				// Reopen home page to avoid JS security issue with credentials in URL
 				Action.run(NAME, () -> {
 					Selenide.open(siteUrl);
-					validate();
 				});
+				
+				validate();
 			}
 			else
 			{
@@ -51,8 +52,9 @@ public class Homepage
 				Action.run(NAME + "_Auth", () -> 
 				{
 					Selenide.open(siteUrl, "", siteUsername, sitePassword);
-					validate();
 				});
+				
+				validate();
 			}
 		}
 		else 
@@ -66,8 +68,9 @@ public class Homepage
 			// Reopen home page to avoid JS security issue with credentials in URL
 			Action.run(NAME, () -> {
 				Selenide.open(siteUrl);
-				validate();
 			});
+			
+			validate();
 		}
 	}	
 	
