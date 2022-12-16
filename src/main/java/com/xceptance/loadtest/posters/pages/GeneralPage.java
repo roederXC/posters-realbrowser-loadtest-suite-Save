@@ -28,10 +28,10 @@ public class GeneralPage
 
             // send search, this is our page load
             $("#btnSearch").click();
-
-            // verify count
-            $("#totalProductCount").should(Condition.exactText(expectedCount));
         });
+        
+        // verify count
+        $("#totalProductCount").should(Condition.exactText(expectedCount));
     }
 
     public static void openTopCategory()
@@ -42,10 +42,10 @@ public class GeneralPage
             final ElementsCollection categoryLinks = getTopCategories();
             final SelenideElement randomCatagory = RandomUtils.randomEntry(categoryLinks);
             randomCatagory.click();
-
-            // verify category page
-            $("#titleCategoryName").should(exist);
         });
+        
+        // verify category page
+        $("#titleCategoryName").should(exist);
     }
 
     public static void openSubCategory()
@@ -58,10 +58,10 @@ public class GeneralPage
             final ElementsCollection categoryLinks = randomTopCategory.$$("ul.dropdown-menu a").filterBy(visible).as("CategoryLinks").shouldBe(sizeGreaterThan(0));
             final SelenideElement randomCatagory = RandomUtils.randomEntry(categoryLinks);
             randomCatagory.click();
-
-            // verify category page
-            $("#titleCategoryName").should(exist);
         });
+        
+        // verify category page
+        $("#titleCategoryName").should(exist);
     }
 
     private static ElementsCollection getTopCategories()
@@ -77,10 +77,10 @@ public class GeneralPage
             final SelenideElement productLink = RandomUtils.randomEntry(productLinks);
 
             productLink.click();
-
-            // Check if we are on a ProductDetailPage
-            ProductDetailsPage.validate();
         });
+        
+        // Check if we are on a ProductDetailPage
+        ProductDetailsPage.validate();
     }
 
     public static void executePaging()
@@ -88,18 +88,18 @@ public class GeneralPage
         final ElementsCollection pagingLinks = $$("#pagination-bottom li:not(.active)>a").filterBy(visible);
         if(!pagingLinks.isEmpty())
         {
+            // save the origin page number. We need this later for validation
+            int originPage = Integer.valueOf($("#pagination-bottom li.active").getText());
+            
             Action.run("Paging", () ->
             {
-                // save the origin page number
-                int originPage = Integer.valueOf($("#pagination-bottom li.active").getText());
-                
                 final SelenideElement paginLink = RandomUtils.randomEntry(pagingLinks);
                 paginLink.click();
-
-                // validation
-                int newPage = Integer.valueOf($("#pagination-bottom li.active").getText());
-                Assert.assertFalse("We did not changed the Page", originPage == newPage);
             });           
+            
+            // validation
+            int newPage = Integer.valueOf($("#pagination-bottom li.active").getText());
+            Assert.assertFalse("We did not changed the Page", originPage == newPage);
         }       
     }
 
@@ -109,10 +109,10 @@ public class GeneralPage
         {
             $("#headerCartOverview").should(visible).hover();
             $("#miniCartMenu .btn-primary").should(visible).hover().click();
-
-            // check if we are on the cart page
-            CartPage.validate();
         });        
+        
+        // check if we are on the cart page
+        CartPage.validate();
     }
 
     public static void openCreateNewAccount()
@@ -123,9 +123,9 @@ public class GeneralPage
 
             $("#showUserMenu").should(visible).hover();
             $("#userMenu .goToRegistration").should(visible).click();
-
-            // check if we are on the create account page
-            CreateAccountPage.validate();
         });
+        
+        // check if we are on the create account page
+        CreateAccountPage.validate();
     }
 }

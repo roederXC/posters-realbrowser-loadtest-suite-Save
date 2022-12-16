@@ -37,12 +37,12 @@ public class CreateAccountPage
         Action.run("SubmitAccountForm", () ->
         {       
             $("#btnRegister").should(visible).click();
-            
-            // verify success page
-            $("#successMessage").should(visible);
-            
-            // check if we are on the login page
-            LoginPage.validate();
         });       
+        
+        // verify success page
+        $("#successMessage").should(visible);
+        
+        // check if we are on the login page
+        LoginPage.validate();
     }
 }
