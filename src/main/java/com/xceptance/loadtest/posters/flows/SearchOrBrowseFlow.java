@@ -1,11 +1,11 @@
 package com.xceptance.loadtest.posters.flows;
 
-
 import com.xceptance.loadtest.api.flow.Flow;
 import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.data.FileDataSupplier;
 import com.xceptance.loadtest.posters.pages.GeneralPage;
 
+// This is a flow.
 // The purpose of a flow is to summarize repetitive processes.
 
 /** 
@@ -28,7 +28,8 @@ public class SearchOrBrowseFlow implements Flow
         }
         else
         {
-            // get us a category context
+            // How often do we need the categories touched per browsing flow before refining
+            // find "browsing.categoryRounds" in project.properties
             final int categoryRounds = Context.configuration().browseCategoriesRounds.random();
 
             for (int j = 0; j < categoryRounds; j++)
