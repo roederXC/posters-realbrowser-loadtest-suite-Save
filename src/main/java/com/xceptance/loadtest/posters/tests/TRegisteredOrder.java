@@ -22,7 +22,7 @@ public class TRegisteredOrder extends LoadTestCase
 	 */
     public void test() throws FlowStoppedException
     {
-        // Flag test case
+     // Flag test case that we need a registered account
         Context.requiresRegisteredAccount(true);
         
         Context.get().data.attachAccount();
@@ -40,9 +40,11 @@ public class TRegisteredOrder extends LoadTestCase
     	LoginPage.fillAccountForm();
     	LoginPage.submitForm();
     	
+    	// You can set up a distribution how many Items you want in how many cases in your cart.
+    	// Find cart.add.count.distribution in project.properties or overwrite it in dev.properties.
     	int targetItemCount = Context.configuration().addToCartCount.value;
-    	final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);
     	
+    	final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);    	
     	while (Context.get().data.totalAddToCartCount < targetItemCount)
         {
             // Check if the maximum number of attempts is reached
@@ -60,7 +62,8 @@ public class TRegisteredOrder extends LoadTestCase
         }
     	
     	GeneralPage.viewCart();
-    	
+
+        // Checkout Process
     	CartPage.proceedToCheckout();
     	
     	CheckoutPage.fillShippingForm();

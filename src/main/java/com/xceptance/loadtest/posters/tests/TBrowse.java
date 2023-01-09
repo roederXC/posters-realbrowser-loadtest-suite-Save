@@ -21,6 +21,8 @@ public class TBrowse extends LoadTestCase
 
         for (int i = 0; i < rounds; i++)
         {
+            // How often do we need the categories touched per browsing flow before refining
+            // find "browsing.categoryRounds" in project.properties
             final int categoryRounds = Context.configuration().browseCategoriesRounds.random();
 
             for (int j = 0; j < categoryRounds; j++)

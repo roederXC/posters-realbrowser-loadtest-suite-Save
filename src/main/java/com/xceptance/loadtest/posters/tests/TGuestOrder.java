@@ -24,7 +24,10 @@ public class TGuestOrder extends LoadTestCase
     	// using the Context as well as the attached configuration.
     	Homepage.open();
     	
-    	int targetItemCount = Context.configuration().addToCartCount.value;
+    	// You can set up a distribution how many Items you want in how many cases in your cart.
+        // Find cart.add.count.distribution in project.properties or overwrite it in dev.properties.
+        int targetItemCount = Context.configuration().addToCartCount.value;
+        
     	final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);
     	while (Context.get().data.totalAddToCartCount < targetItemCount)
         {
@@ -42,7 +45,8 @@ public class TGuestOrder extends LoadTestCase
             ProductDetailsPage.addToCart();
         }
     	GeneralPage.viewCart();
-    	
+
+        // Checkout Process
     	CartPage.proceedToCheckout();
     	
     	Context.get().data.attachAccount();

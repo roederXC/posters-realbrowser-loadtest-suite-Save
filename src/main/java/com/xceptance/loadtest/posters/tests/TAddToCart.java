@@ -12,7 +12,7 @@ import com.xceptance.loadtest.posters.pages.ProductDetailsPage;
 public class TAddToCart extends LoadTestCase
 {
     /**
-     * Open the landing page, browse the catalog. If there's a result grid open a random product's detail view.
+     * Open the landing page, browse the catalog. If there's a result grid open a random product's detail view and add it to cart.
      * @throws FlowStoppedException 
      */
     @Override
@@ -22,9 +22,11 @@ public class TAddToCart extends LoadTestCase
         // using the Context as well as the attached configuration.
         Homepage.open();
 
-        final int targetItemCount = Context.configuration().addToCartCount.value;
+        // You can set up a distribution how many Items you want in how many cases in your cart.
+        // Find cart.add.count.distribution in project.properties or overwrite it in dev.properties.
+        int targetItemCount = Context.configuration().addToCartCount.value;
+        
         final SafetyBreak addToCartSafetyBreak = new SafetyBreak(5);
-
         while (Context.get().data.totalAddToCartCount < targetItemCount)
         {
             // Check if the maximum number of attempts is reached
@@ -40,7 +42,6 @@ public class TAddToCart extends LoadTestCase
             // add to cart
             ProductDetailsPage.addToCart();
         }
-
         GeneralPage.viewCart();
     }
 }

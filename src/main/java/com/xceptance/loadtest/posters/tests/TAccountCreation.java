@@ -6,7 +6,6 @@ import com.xceptance.loadtest.posters.pages.CreateAccountPage;
 import com.xceptance.loadtest.posters.pages.GeneralPage;
 import com.xceptance.loadtest.posters.pages.Homepage;
 
-
 public class TAccountCreation extends LoadTestCase
 {
 	/**
@@ -14,7 +13,7 @@ public class TAccountCreation extends LoadTestCase
 	 */
     public void test()
     {
-        // Flag test case
+        // Flag test case that we need a registered account
         Context.requiresRegisteredAccount(true);
         
         Context.get().data.attachAccount();
