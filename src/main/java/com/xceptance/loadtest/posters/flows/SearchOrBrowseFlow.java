@@ -8,9 +8,10 @@ import com.xceptance.loadtest.posters.pages.GeneralPage;
 // This is a flow.
 // The purpose of a flow is to summarize repetitive processes.
 
-/** 
- * The SearchOrBrowseFlow decides on the basis of a probability whether a search or a browse is executed and executes it.
- * Then, based on a probability, a paging is executed and a product is opened.
+/**
+ * The SearchOrBrowseFlow decides on the basis of a probability whether a search
+ * or a browse is executed and executes it. Then, based on a probability, a
+ * paging is executed and a product is opened.
  * 
  * @author roederXC (Xceptance Software Technologies GmbH)
  */
@@ -21,10 +22,11 @@ public class SearchOrBrowseFlow implements Flow
     {
         if (Context.configuration().searchOnAddToCartProbability.random())
         {
-            // search, get some data first, feel free to replace the Tuple approach for the return 
+            // search, get some data first, feel free to replace the Tuple approach for the
+            // return
             // value if this seems to fancy or stubborn or is not needed
-            var data = FileDataSupplier.searchPhraseWithResult();
-            GeneralPage.search(data.valueA, data.valueB);            
+            final var data = FileDataSupplier.searchPhraseWithResult();
+            GeneralPage.search(data.valueA, data.valueB);
         }
         else
         {
@@ -35,7 +37,7 @@ public class SearchOrBrowseFlow implements Flow
             for (int j = 0; j < categoryRounds; j++)
             {
                 // work on categories
-                if(Context.get().configuration.topCategoryProbability.random())
+                if (Context.get().configuration.topCategoryProbability.random())
                 {
                     GeneralPage.openTopCategory();
                 }
@@ -45,16 +47,17 @@ public class SearchOrBrowseFlow implements Flow
                 }
             }
         }
-        
-        // paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in project.properties
+
+        // paging on Product Listing Pages - find "browsing.flow.paging.flow.range" in
+        // project.properties
         final int pagingRounds = Context.configuration().pagingRounds.random();
 
         for (int j = 0; j < pagingRounds; j++)
         {
             GeneralPage.executePaging();
-        }        
-        
+        }
+
         // open a Product Detail page
-        GeneralPage.openProductDetailsPage();        
+        GeneralPage.openProductDetailsPage();
     }
 }

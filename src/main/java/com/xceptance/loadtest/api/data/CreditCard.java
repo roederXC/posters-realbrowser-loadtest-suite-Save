@@ -63,7 +63,8 @@ public class CreditCard implements Initable
         // But that should not be random but repeatable, same credit card, same number
         if (StringUtils.isBlank(cvc))
         {
-            // make sure it is 100 till 999, so that we do not have a padding problems with 7
+            // make sure it is 100 till 999, so that we do not have a padding problems with
+            // 7
             // that should be 007, yes, AMEX is 4 digits
             if ("AMEX".equalsIgnoreCase(type))
             {
@@ -78,7 +79,7 @@ public class CreditCard implements Initable
         // Year. If no year is configured, take the very next year from NOW.
         if (StringUtils.isBlank(expirationYear))
         {
-            final LocalDate futureYear = LocalDate.now(ZoneId.of("UTC")).plusYears(2) ;
+            final LocalDate futureYear = LocalDate.now(ZoneId.of("UTC")).plusYears(2);
             expirationYear = String.valueOf(futureYear.getYear());
         }
 
@@ -90,12 +91,11 @@ public class CreditCard implements Initable
     }
 
     /**
-     * Returns the owner or if not set, execute the function and use that. If the defaultOwner is an
-     * operation, this is more efficient because the function is lazy and if not called, we are
-     * faster.
+     * Returns the owner or if not set, execute the function and use that. If the
+     * defaultOwner is an operation, this is more efficient because the function is
+     * lazy and if not called, we are faster.
      *
-     * @param defaultOwner
-     *            the default owner as function
+     * @param defaultOwner the default owner as function
      * @return the owner of the card
      */
     public String getOwnerOrElse(final Supplier<String> defaultOwner)
@@ -106,8 +106,7 @@ public class CreditCard implements Initable
     /**
      * Returns the owner or if not set, the default
      *
-     * @param defaultOwner
-     *            the default owner as old school default value
+     * @param defaultOwner the default owner as old school default value
      * @return the owner of the card
      */
     public String getOwnerOrElse(final String defaultOwner)
@@ -115,10 +114,11 @@ public class CreditCard implements Initable
         return owner == null ? defaultOwner : owner;
     }
 
-	@Override
-	public String toString() {
-		return "CreditCard [cvc=" + cvc + ", owner=" + owner + ", number=" + number + ", unformattedNumber="
-				+ unformattedNumber + ", expirationMonth=" + expirationMonth + ", expirationYear=" + expirationYear
-				+ ", issueNumber=" + issueNumber + ", type=" + type + "]";
-	}
+    @Override
+    public String toString()
+    {
+        return "CreditCard [cvc=" + cvc + ", owner=" + owner + ", number=" + number + ", unformattedNumber="
+                + unformattedNumber + ", expirationMonth=" + expirationMonth + ", expirationYear=" + expirationYear
+                + ", issueNumber=" + issueNumber + ", type=" + type + "]";
+    }
 }

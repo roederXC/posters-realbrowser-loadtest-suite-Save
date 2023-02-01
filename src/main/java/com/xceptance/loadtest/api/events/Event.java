@@ -16,28 +16,30 @@ public class Event
         // Property lookup and decision
         final LTProperties properties = Context.configuration().properties;
         final String defaultLogLevel = properties.getProperty("events.logging.default.level", "debug");
-        final String logLevel = properties.getProperty("events.logging." + propertyName + ".level", defaultLogLevel).toLowerCase();
+        final String logLevel = properties.getProperty("events.logging." + propertyName + ".level", defaultLogLevel)
+                .toLowerCase();
 
         final Event event;
-        switch (logLevel) {
-            case "error":
-                event = new ERROR();
-                break;
+        switch (logLevel)
+        {
+        case "error":
+            event = new ERROR();
+            break;
 
-            case "warn":
-                event = new WARN();
-                break;
+        case "warn":
+            event = new WARN();
+            break;
 
-            case "info":
-                event = new INFO();
-                break;
+        case "info":
+            event = new INFO();
+            break;
 
-            case "debug":
-                event = new DEBUG();
-                break;
+        case "debug":
+            event = new DEBUG();
+            break;
 
-            default:
-                throw new IllegalArgumentException("Log level '" + logLevel + "' not supported.");
+        default:
+            throw new IllegalArgumentException("Log level '" + logLevel + "' not supported.");
         }
 
         return event;

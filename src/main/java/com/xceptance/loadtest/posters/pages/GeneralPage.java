@@ -17,7 +17,7 @@ import com.xceptance.loadtest.api.util.RandomUtils;
  * 
  * @author roederXC (Xceptance Software Technologies GmbH)
  */
-public class GeneralPage 
+public class GeneralPage
 {
 	public static void search(final String phrase, final String expectedCount)
 	{
@@ -29,7 +29,7 @@ public class GeneralPage
             // send search, this is our page load
             $("#btnSearch").click();
         });
-        
+
         // verify count
         $("#totalProductCount").should(Condition.exactText(expectedCount));
     }
@@ -43,7 +43,7 @@ public class GeneralPage
             final SelenideElement randomCatagory = RandomUtils.randomEntry(categoryLinks);
             randomCatagory.click();
         });
-        
+
         // verify category page
         $("#titleCategoryName").should(exist);
     }
@@ -55,11 +55,12 @@ public class GeneralPage
             // click random category link
             final ElementsCollection topCategories = getTopCategories();
             final SelenideElement randomTopCategory = RandomUtils.randomEntry(topCategories).hover();
-            final ElementsCollection categoryLinks = randomTopCategory.$$("ul.dropdown-menu a").filterBy(visible).as("CategoryLinks").shouldBe(sizeGreaterThan(0));
+            final ElementsCollection categoryLinks = randomTopCategory.$$("ul.dropdown-menu a").filterBy(visible)
+                    .as("CategoryLinks").shouldBe(sizeGreaterThan(0));
             final SelenideElement randomCatagory = RandomUtils.randomEntry(categoryLinks);
             randomCatagory.click();
         });
-        
+
         // verify category page
         $("#titleCategoryName").should(exist);
     }
@@ -73,12 +74,13 @@ public class GeneralPage
     {
         Action.run("OpenProduct", () ->
         {
-            final ElementsCollection productLinks = $$("#productOverview a").filterBy(visible).as("Products").shouldBe(sizeGreaterThan(0));
+            final ElementsCollection productLinks = $$("#productOverview a").filterBy(visible).as("Products")
+                    .shouldBe(sizeGreaterThan(0));
             final SelenideElement productLink = RandomUtils.randomEntry(productLinks);
 
             productLink.click();
         });
-        
+
         // Check if we are on a ProductDetailPage
         ProductDetailsPage.validate();
     }
@@ -86,21 +88,21 @@ public class GeneralPage
     public static void executePaging()
     {
         final ElementsCollection pagingLinks = $$("#pagination-bottom li:not(.active)>a").filterBy(visible);
-        if(!pagingLinks.isEmpty())
+        if (!pagingLinks.isEmpty())
         {
             // save the origin page number. We need this later for validation
             int originPage = Integer.valueOf($("#pagination-bottom li.active").getText());
-            
+
             Action.run("Paging", () ->
             {
                 final SelenideElement paginLink = RandomUtils.randomEntry(pagingLinks);
                 paginLink.click();
-            });           
-            
+            });
+
             // validation
             int newPage = Integer.valueOf($("#pagination-bottom li.active").getText());
             Assert.assertFalse("We did not changed the Page", originPage == newPage);
-        }       
+        }
     }
 
     public static void viewCart()
@@ -109,8 +111,8 @@ public class GeneralPage
         {
             $("#headerCartOverview").should(visible).hover();
             $("#miniCartMenu .btn-primary").should(visible).hover().click();
-        });        
-        
+        });
+
         // check if we are on the cart page
         CartPage.validate();
     }
@@ -124,7 +126,7 @@ public class GeneralPage
             $("#showUserMenu").should(visible).hover();
             $("#userMenu .goToRegistration").should(visible).click();
         });
-        
+
         // check if we are on the create account page
         CreateAccountPage.validate();
     }

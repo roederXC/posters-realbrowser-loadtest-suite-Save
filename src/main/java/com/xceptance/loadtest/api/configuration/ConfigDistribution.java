@@ -17,7 +17,8 @@ public class ConfigDistribution
     /**
      * Default empty is always 0
      */
-    private final static int[] DEFAULT = { 0 };
+    private final static int[] DEFAULT =
+    { 0 };
 
     /**
      * The raw value read
@@ -57,8 +58,8 @@ public class ConfigDistribution
     /**
      * To get a new random value at every access
      *
-     * @return an int value or an {@link IllegalArgumentException} when the data
-     *         is not initalized
+     * @return an int value or an {@link IllegalArgumentException} when the data is
+     *         not initalized
      */
     public int random()
     {
@@ -77,7 +78,9 @@ public class ConfigDistribution
             super(value, delimiter);
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see com.xceptance.xlt.loadtest.util.configuration.ConfigList#random()
          */
         @Override
@@ -100,10 +103,8 @@ public class ConfigDistribution
     /**
      * Sets up the distribution
      *
-     * @param data
-     *            the parsable definition
-     * @param delimiters
-     *            possible delimiters to use
+     * @param data       the parsable definition
+     * @param delimiters possible delimiters to use
      * @return the distribution array
      */
     public static int[] parseDistributionDefinition(final String data, final String delimiters)
@@ -196,7 +197,9 @@ public class ConfigDistribution
     public String toString()
     {
         final int maxLen = 10;
-        return "ConfigDistribution [raw=" + (raw != null ? Arrays.toString(Arrays.copyOf(raw, Math.min(raw.length, maxLen))) : null) + ", value=" + value + "]";
+        return "ConfigDistribution [raw="
+                + (raw != null ? Arrays.toString(Arrays.copyOf(raw, Math.min(raw.length, maxLen))) : null) + ", value="
+                + value + "]";
     }
 
 }

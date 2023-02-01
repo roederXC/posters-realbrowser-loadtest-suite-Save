@@ -4,9 +4,9 @@ import com.xceptance.loadtest.api.configuration.annotations.EnumProperty;
 import com.xceptance.loadtest.api.data.Site;
 
 /**
- * This class holds the initialized site values which are needed before a test case starts, hence
- * they don't fit into the general configuration. This also means they are not test case specific
- * and can not be put into a user context.
+ * This class holds the initialized site values which are needed before a test
+ * case starts, hence they don't fit into the general configuration. This also
+ * means they are not test case specific and can not be put into a user context.
  *
  * @author Xceptance Software Technologies
  */
