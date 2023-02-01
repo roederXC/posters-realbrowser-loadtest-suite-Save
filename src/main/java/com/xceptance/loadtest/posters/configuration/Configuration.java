@@ -96,7 +96,8 @@ public class Configuration
     @Property(key = "general.debug.actions")
     public boolean useDebugActions;
 
-    // Generate totally random emails by using the UUID generator or use the XltRandom generator to create a reproducible stream of emails
+    // Generate totally random emails by using the UUID generator or use the
+    // XltRandom generator to create a reproducible stream of emails
     @Property(key = "general.email.stronglyRandom")
     public boolean stronglyRandomEmails;
 
@@ -146,7 +147,7 @@ public class Configuration
     // How often do we want to walk the catalog path from the top
     @Property(key = "browsing.rounds")
     public ConfigRange browsingRounds;
-    
+
     // How often do we need the categories touched per browsing flow before refining
     @Property(key = "browsing.categoryRounds", immutable = false)
     public ConfigRange browseCategoriesRounds;
@@ -174,9 +175,10 @@ public class Configuration
     @Property(key = "cart.view", immutable = false)
     public ConfigProbability viewCartProbability;
 
-    // Do we need a counter for add2cart and view cart, mainly for performance debugging
-    //@Property(key = "cart.report.bySize")
-    //public boolean reportCartBySize;
+    // Do we need a counter for add2cart and view cart, mainly for performance
+    // debugging
+    // @Property(key = "cart.report.bySize")
+    // public boolean reportCartBySize;
 
     // how many product do we want per add to cart?
     @Property(key = "cart.product.quantity", immutable = false)
@@ -240,8 +242,8 @@ public class Configuration
     /**
      * Return text from the localization section, fails if the text is not available
      *
-     * @param key
-     *            the key to search for including hierarchy excluding "localization."
+     * @param key the key to search for including hierarchy excluding
+     *            "localization."
      * @return the found localized
      */
     public String localizedText(final String key)
@@ -257,8 +259,8 @@ public class Configuration
     }
 
     /**
-     * Returns the properties that are current for this context and the source of this
-     * configuration. You can also directly access them, if you like.
+     * Returns the properties that are current for this context and the source of
+     * this configuration. You can also directly access them, if you like.
      *
      * @return the property set
      */

@@ -12,12 +12,13 @@ import com.xceptance.xlt.api.util.XltRandom;
 public class RandomUtils
 {
     /**
-     * Gets a random value from the list with equal weight on the full list using XltRandom
+     * Gets a random value from the list with equal weight on the full list using
+     * XltRandom
      *
-     * @param list
-     *            the list to get entries from
+     * @param list the list to get entries from
      *
-     * @return a list entry or null if the list is empty, compare this to LookUpResult.random()
+     * @return a list entry or null if the list is empty, compare this to
+     *         LookUpResult.random()
      */
     public static <T> T randomEntry(final List<T> list)
     {
@@ -32,15 +33,14 @@ public class RandomUtils
     }
 
     /**
-     * Gets a random value from a list, weighting the later entries higher than the first based on
-     * an assumed bucket size
+     * Gets a random value from a list, weighting the later entries higher than the
+     * first based on an assumed bucket size
      *
-     * @param list
-     *            the list to get entries from
-     * @param bucketSize
-     *            the assumed size of buckets to weight on
+     * @param list       the list to get entries from
+     * @param bucketSize the assumed size of buckets to weight on
      *
-     * @return a list entry or null if the list is empty, compare this to LookUpResult.random()
+     * @return a list entry or null if the list is empty, compare this to
+     *         LookUpResult.random()
      */
     public static <T> T weightedRandomEntry(final List<T> list, final int bucketSize)
     {

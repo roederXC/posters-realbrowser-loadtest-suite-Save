@@ -60,8 +60,7 @@ public class WeightedList<T>
 
     /**
      *
-     * @param weightedElement
-     *            must not be <code>null</code>
+     * @param weightedElement must not be <code>null</code>
      * @return the updated {@link WeightedList} object
      */
     public WeightedList<T> add(final Pair<T, Integer> weightedElement)
@@ -76,27 +75,25 @@ public class WeightedList<T>
 
     /**
      *
-     * @param weightedElements
-     *            must not be <code>null</code>
+     * @param weightedElements must not be <code>null</code>
      * @return the updated {@link WeightedList} object
      */
     public WeightedList<T> addAll(final Collection<Pair<T, Integer>> weightedElements)
     {
         Args.notNull(weightedElements, "The weighted elements collection");
 
-        weightedElements.forEach(
-                        pair ->
-                        {
-                            add(pair);
-                            unweightedElements.add(pair.getKey());
-                        });
+        weightedElements.forEach(pair ->
+        {
+            add(pair);
+            unweightedElements.add(pair.getKey());
+        });
 
         return this;
     }
 
     /**
-     * Get the element on the given index position. This method provided common
-     * list access to the elements and is not influenced by the weight feature.
+     * Get the element on the given index position. This method provided common list
+     * access to the elements and is not influenced by the weight feature.
      *
      * @param index
      * @return
@@ -114,9 +111,7 @@ public class WeightedList<T>
      */
     public List<T> weightedList()
     {
-        return weightedElements.stream().map(
-                        pair -> pair.getLeft())
-                        .collect(Collectors.toList());
+        return weightedElements.stream().map(pair -> pair.getLeft()).collect(Collectors.toList());
     }
 
     /**
@@ -155,8 +150,8 @@ public class WeightedList<T>
     }
 
     /**
-     * Get a random element, according to their weight. If no element is
-     * available, return the given default.
+     * Get a random element, according to their weight. If no element is available,
+     * return the given default.
      *
      * @return random element or default
      */

@@ -83,8 +83,8 @@ public class AccountSupplierManager
     }
 
     /**
-     * Checks if account data for current siteId is set in properties file to override randomness
-     * for debug purpose
+     * Checks if account data for current siteId is set in properties file to
+     * override randomness for debug purpose
      *
      * @param account
      * @return flag if at least one override was used
@@ -138,7 +138,8 @@ public class AccountSupplierManager
     }
 
     /**
-     * Read the account from file and replace the values from the file. Mark the account origin to FILE.
+     * Read the account from file and replace the values from the file. Mark the
+     * account origin to FILE.
      *
      * @return Account
      */
@@ -151,7 +152,7 @@ public class AccountSupplierManager
             a.firstname = decode[0];
             a.lastname = decode[1];
             a.email = decode[2];
-            a.login =  decode[3];
+            a.login = decode[3];
             a.orderID = decode[4];
 
             a.isRegistered = true;
@@ -160,27 +161,27 @@ public class AccountSupplierManager
             return a;
         });
     }
-    
+
     /**
-     *  Parser for the exclusive data provider to read account files.
+     * Parser for the exclusive data provider to read account files.
      */
     public static final Parser<Optional<Account>> PARSER = new Parser<Optional<Account>>()
     {
         @Override
-        public List<Optional<Account>> parse(final List<String> rows) 
+        public List<Optional<Account>> parse(final List<String> rows)
         {
-            return rows.stream()
-                .filter(row -> !row.trim().startsWith("#")) // ignore hashed out lines
-                .map(row -> getExclusiveFromFile(row)) // convert row to object
-                .filter(gc -> gc != null) // ignore failed conversions
-                .collect(Collectors.toList());
+            return rows.stream().filter(row -> !row.trim().startsWith("#")) // ignore hashed out lines
+                    .map(row -> getExclusiveFromFile(row)) // convert row to object
+                    .filter(gc -> gc != null) // ignore failed conversions
+                    .collect(Collectors.toList());
         }
     };
-    
+
     /**
      * Read a previous used account from file, exclusively.
-     * @throws IOException 
-     * @throws FileNotFoundException 
+     * 
+     * @throws IOException
+     * @throws FileNotFoundException
      */
     private static Optional<Account> getExclusiveFromFile(String row)
     {
@@ -199,9 +200,10 @@ public class AccountSupplierManager
             return a;
         });
     }
-    
+
     /**
      * Get us an exclusive account.
+     * 
      * @return new Optional<Account>
      */
     public static final Optional<Account> getExclusiveAccount()

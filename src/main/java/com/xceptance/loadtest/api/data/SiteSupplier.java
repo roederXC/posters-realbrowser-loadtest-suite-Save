@@ -8,7 +8,8 @@ import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.xlt.api.util.XltRandom;
 
 /**
- * Supplies a site either randomly via the given distribution (market share) or a fixed one when requesting via ID.
+ * Supplies a site either randomly via the given distribution (market share) or
+ * a fixed one when requesting via ID.
  * 
  * @author Xceptance Software Technologies
  */
@@ -16,8 +17,8 @@ public class SiteSupplier
 {
     private static List<Site> getSitesAndMarketShare()
     {
-    	final List<Site> sites = new ArrayList<>(100);
-    	
+        final List<Site> sites = new ArrayList<>(100);
+
         // Setup all sites, distributed by their given market share
         for (final Site site : Context.defaultConfiguration.get().sites.unweightedList())
         {
@@ -33,7 +34,7 @@ public class SiteSupplier
                 sites.add(site);
             }
         }
-        
+
         return sites;
     }
 
@@ -44,7 +45,7 @@ public class SiteSupplier
      */
     public static Optional<Site> getRandomSite()
     {
-    	final List<Site> sites = getSitesAndMarketShare();
+        final List<Site> sites = getSitesAndMarketShare();
         if (sites.isEmpty())
         {
             return Optional.empty();

@@ -21,7 +21,8 @@ import com.xceptance.xlt.api.util.XltProperties;
 /**
  * Builds the configuration from the given properties.
  * 
- * Processes a class with configuration annotations and returns an actual configuration instance.
+ * Processes a class with configuration annotations and returns an actual
+ * configuration instance.
  *
  * @author Xceptance Software Technologies
  */
@@ -35,8 +36,7 @@ public class ConfigurationBuilder
     /**
      * Create a new configuration builder that uses certain properties
      *
-     * @param properties
-     *            the properties to read from via a lookup
+     * @param properties the properties to read from via a lookup
      */
     public ConfigurationBuilder(final LTProperties properties)
     {
@@ -44,10 +44,10 @@ public class ConfigurationBuilder
     }
 
     /**
-     * Create a new builder and use the default property lookup This is meant for testing.
+     * Create a new builder and use the default property lookup This is meant for
+     * testing.
      *
-     * @param clazz
-     *            the class to build the config on
+     * @param clazz the class to build the config on
      * @return the fully setup class
      */
     public static <T> T buildDefault(final Class<T> clazz)
@@ -61,10 +61,8 @@ public class ConfigurationBuilder
     /**
      * Returns a new configuration based with all annotated values set
      *
-     * @param prefix
-     *            a property prefix in case we nest things
-     * @param clazz
-     *            the class to build the config on
+     * @param prefix a property prefix in case we nest things
+     * @param clazz  the class to build the config on
      * @return the fully setup class
      *
      * @throws IllegalAccessException
@@ -175,23 +173,20 @@ public class ConfigurationBuilder
                         else
                         {
                             // well, we do not know it, so complain
-                            throw new IllegalArgumentException(MessageFormat.format("Annotation type for '{1}' not supported: {0}", enumAnnotation.toString(), field.getName()));
+                            throw new IllegalArgumentException(
+                                    MessageFormat.format("Annotation type for '{1}' not supported: {0}",
+                                            enumAnnotation.toString(), field.getName()));
                         }
                     }
                 }
             }
 
             return instance;
-        }
-        catch (final IllegalAccessException | InstantiationException | InvocationTargetException | IllegalArgumentException e)
+        } catch (final IllegalAccessException | InstantiationException | InvocationTargetException
+                | IllegalArgumentException e)
         {
-            throw new RuntimeException(
-                            MessageFormat.format(
-                                            "Could not initialize {0} due to {1} - {2}",
-                                            clazz.toString(),
-                                            e.getClass().getSimpleName(),
-                                            e.getMessage()),
-                            e);
+            throw new RuntimeException(MessageFormat.format("Could not initialize {0} due to {1} - {2}",
+                    clazz.toString(), e.getClass().getSimpleName(), e.getMessage()), e);
         }
 
     }
@@ -199,8 +194,7 @@ public class ConfigurationBuilder
     /**
      * Processes enum config property
      *
-     * @param annotation
-     *            the annotation to process
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private EnumConfigList<?> initializeEnumConfigList(final EnumProperty annotation)
@@ -211,7 +205,7 @@ public class ConfigurationBuilder
         // ok, loop
         AssertionError firstError = null;
 
-        for (int i = annotation.from(); i <= annotation.to(); i++ )
+        for (int i = annotation.from(); i <= annotation.to(); i++)
         {
             Pair<Object, Integer> o = null;
 
@@ -227,8 +221,7 @@ public class ConfigurationBuilder
                 try
                 {
                     o = handleEnumPropertyClazz(annotation, i);
-                }
-                catch (final AssertionError error)
+                } catch (final AssertionError error)
                 {
                     firstError = firstError == null ? error : firstError;
                 }
@@ -275,18 +268,13 @@ public class ConfigurationBuilder
         {
             if (firstError == null)
             {
-                Assert.fail(
-                                MessageFormat.format(
-                                                "No value provided for ''{0}''",
-                                                propertyLookup.getEffectiveKey(annotation.key())));
+                Assert.fail(MessageFormat.format("No value provided for ''{0}''",
+                        propertyLookup.getEffectiveKey(annotation.key())));
             }
             else
             {
-                Assert.fail(
-                                MessageFormat.format(
-                                                "No value provided for ''{0}'', that might be because of {1}",
-                                                propertyLookup.getEffectiveKey(annotation.key()),
-                                                firstError.getMessage()));
+                Assert.fail(MessageFormat.format("No value provided for ''{0}'', that might be because of {1}",
+                        propertyLookup.getEffectiveKey(annotation.key()), firstError.getMessage()));
             }
         }
 
@@ -301,16 +289,13 @@ public class ConfigurationBuilder
     }
 
     /**
-     * Handle an Enum subtype, because this can be a plain flat Java object as
-     * well
+     * Handle an Enum subtype, because this can be a plain flat Java object as well
      *
-     * @param annotation
-     *            the annotation to process
-     * @param index
-     *            the current index position
+     * @param annotation the annotation to process
+     * @param index      the current index position
      *
-     * @return the looked up object value as left part of the pair and its
-     *         weight (Integer value) as right part
+     * @return the looked up object value as left part of the pair and its weight
+     *         (Integer value) as right part
      */
     private Pair<Object, Integer> handleEnumPropertyClazz(final EnumProperty annotation, final int index)
     {
@@ -351,10 +336,10 @@ public class ConfigurationBuilder
                 try
                 {
                     return Pair.of(Integer.valueOf(value), weight);
-                }
-                catch (final NumberFormatException e)
+                } catch (final NumberFormatException e)
                 {
-                    Assert.fail(MessageFormat.format("''{0}'' is not an integer", propertyLookup.getEffectiveKey(fullKey)));
+                    Assert.fail(
+                            MessageFormat.format("''{0}'' is not an integer", propertyLookup.getEffectiveKey(fullKey)));
                 }
             }
             else if (annotation.clazz().equals(Boolean.class))
@@ -365,18 +350,17 @@ public class ConfigurationBuilder
                 try
                 {
                     return Pair.of(Boolean.valueOf(value), weight);
-                }
-                catch (final NumberFormatException e)
+                } catch (final NumberFormatException e)
                 {
-                    Assert.fail(MessageFormat.format("''{0}'' is not a boolean", propertyLookup.getEffectiveKey(fullKey)));
+                    Assert.fail(
+                            MessageFormat.format("''{0}'' is not a boolean", propertyLookup.getEffectiveKey(fullKey)));
                 }
             }
             else
             {
                 // ok, we do not support any other simple type at the moment
                 Assert.fail(MessageFormat.format("Class {1} of ''{0}'' is not supported",
-                                propertyLookup.getEffectiveKey(fullKey),
-                                annotation.clazz()));
+                        propertyLookup.getEffectiveKey(fullKey), annotation.clazz()));
             }
         }
 
@@ -385,11 +369,10 @@ public class ConfigurationBuilder
     }
 
     /**
-     * Get the values weight. If no weight is configured explicitly, the
-     * implicit value is <code>1</code>.
+     * Get the values weight. If no weight is configured explicitly, the implicit
+     * value is <code>1</code>.
      *
-     * @param fullKey
-     *            the enum's basic property key
+     * @param fullKey    the enum's basic property key
      * @param isJDKClass
      * @return the values's weight. This value will e <code>1</code> or greater.
      *         <code>1</code> is also the default value in case no weight is
@@ -412,15 +395,15 @@ public class ConfigurationBuilder
         try
         {
             weight = Integer.valueOf(weightString);
-        }
-        catch (final NumberFormatException e)
+        } catch (final NumberFormatException e)
         {
             Assert.fail(MessageFormat.format("''{0}'' is not an integer", propertyLookup.getEffectiveKey(weightKey)));
         }
 
         if (weight < 1)
         {
-            Assert.fail(MessageFormat.format("''{0}'' is not an integer greater than 0", propertyLookup.getEffectiveKey(weightKey)));
+            Assert.fail(MessageFormat.format("''{0}'' is not an integer greater than 0",
+                    propertyLookup.getEffectiveKey(weightKey)));
         }
 
         return weight;
@@ -434,12 +417,10 @@ public class ConfigurationBuilder
      */
     private boolean isJDKClass(final Class<?> clazz)
     {
-        if (clazz.equals(Boolean.class) ||
-                        clazz.equals(String.class) ||
-                        clazz.equals(Integer.class))
-                        {
+        if (clazz.equals(Boolean.class) || clazz.equals(String.class) || clazz.equals(Integer.class))
+        {
             return true;
-                        }
+        }
         else
         {
             return false;
@@ -449,8 +430,7 @@ public class ConfigurationBuilder
     /**
      * Processes string information
      *
-     * @param annotation
-     *            the annotation to process
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private String initializeString(final Property annotation)
@@ -469,7 +449,8 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (value == null && annotation.required())
         {
-            Assert.fail(MessageFormat.format("No value provided for ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No value provided for ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         return value;
@@ -478,10 +459,8 @@ public class ConfigurationBuilder
     /**
      * Processes int information
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private int initializeInt(final Property annotation)
@@ -500,7 +479,8 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (value == null && annotation.required())
         {
-            Assert.fail(MessageFormat.format("No value provided for ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No value provided for ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
         else if (value == null)
         {
@@ -513,10 +493,10 @@ public class ConfigurationBuilder
         try
         {
             return Integer.valueOf(value);
-        }
-        catch (final NumberFormatException e)
+        } catch (final NumberFormatException e)
         {
-            Assert.fail(MessageFormat.format("''{0}'' is not an integer", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("''{0}'' is not an integer",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         // we should never reach this
@@ -526,10 +506,8 @@ public class ConfigurationBuilder
     /**
      * Processes long information
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private long initializeLong(final Property annotation)
@@ -548,7 +526,8 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (value == null && annotation.required())
         {
-            Assert.fail(MessageFormat.format("No value provided for ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No value provided for ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
         else if (value == null)
         {
@@ -561,23 +540,21 @@ public class ConfigurationBuilder
         try
         {
             return Long.valueOf(value);
-        }
-        catch (final NumberFormatException e)
+        } catch (final NumberFormatException e)
         {
-            Assert.fail(MessageFormat.format("''{0}'' is not a long", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(
+                    MessageFormat.format("''{0}'' is not a long", propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         // we should never reach this
         return 0L;
     }
-    
+
     /**
      * Processes boolean information
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private boolean initializeBoolean(final Property annotation)
@@ -596,7 +573,8 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (value == null && annotation.required())
         {
-            Assert.fail(MessageFormat.format("No value provided for ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No value provided for ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
         else if (value == null)
         {
@@ -609,10 +587,10 @@ public class ConfigurationBuilder
         try
         {
             return Boolean.valueOf(value);
-        }
-        catch (final NumberFormatException e)
+        } catch (final NumberFormatException e)
         {
-            Assert.fail(MessageFormat.format("''{0}'' is not a boolean", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(
+                    MessageFormat.format("''{0}'' is not a boolean", propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         // we should never reach this
@@ -622,10 +600,8 @@ public class ConfigurationBuilder
     /**
      * Create a list for strings
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private ConfigList initializeConfigList(final Property annotation)
@@ -650,21 +626,21 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (value == null && annotation.required())
         {
-            Assert.fail(MessageFormat.format("No value provided for ''{0}''", propertyLookup.getEffectiveKey(annotation.key()) + suffix));
+            Assert.fail(MessageFormat.format("No value provided for ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key()) + suffix));
         }
 
         // turn it into an int, when it fails, complain
-        return annotation.immutable() ? ConfigList.buildImmutable(value, annotation.delimiters()) : ConfigList.build(value, annotation.delimiters());
+        return annotation.immutable() ? ConfigList.buildImmutable(value, annotation.delimiters())
+                : ConfigList.build(value, annotation.delimiters());
     }
 
     /**
      * Creates an integer range based on either min and max or a natural range
      * definition
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private ConfigRange initializeConfigRange(final Property annotation)
@@ -693,7 +669,8 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (annotation.required() && valueRange == null)
         {
-            Assert.fail(MessageFormat.format("No value provided for range definition ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No value provided for range definition ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         // build the ranges, complain if needed
@@ -711,10 +688,8 @@ public class ConfigurationBuilder
      * Creates an time range based on either min and max or a natural range
      * definition
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private ConfigTimeRange initializeConfigTimeRange(final Property annotation)
@@ -743,7 +718,8 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (annotation.required() && valueRange == null)
         {
-            Assert.fail(MessageFormat.format("No value provided for time range definition ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No value provided for time range definition ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         // build the ranges, complain if needed
@@ -760,10 +736,8 @@ public class ConfigurationBuilder
     /**
      * Deal with probability configuration and determines the values
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private ConfigProbability initializeConfigProbability(final Property annotation)
@@ -791,7 +765,8 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (annotation.required() && value == null)
         {
-            Assert.fail(MessageFormat.format("No value provided for probability definition ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No value provided for probability definition ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         // build the ranges, complain if needed
@@ -808,10 +783,8 @@ public class ConfigurationBuilder
     /**
      * Creates the distribution setup and data
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private ConfigDistribution initializeConfigDistribution(final Property annotation)
@@ -836,20 +809,20 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (value == null && annotation.required())
         {
-            Assert.fail(MessageFormat.format("No value provided for ''{0}''", propertyLookup.getEffectiveKey(annotation.key()) + suffix));
+            Assert.fail(MessageFormat.format("No value provided for ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key()) + suffix));
         }
 
         // turn it into an int, when it fails, complain
-        return annotation.immutable() ? ConfigDistribution.buildImmutable(value, annotation.delimiters()) : ConfigDistribution.build(value, annotation.delimiters());
+        return annotation.immutable() ? ConfigDistribution.buildImmutable(value, annotation.delimiters())
+                : ConfigDistribution.build(value, annotation.delimiters());
     }
 
     /**
      * Creates the distribution setup and data
      *
-     * @param field
-     *            the field to care about
-     * @param annotation
-     *            the annotation to process
+     * @param field      the field to care about
+     * @param annotation the annotation to process
      * @return the value to attach to the field
      */
     private Pattern initializePattern(final Property annotation)
@@ -868,23 +841,22 @@ public class ConfigurationBuilder
         // see if we have to complain
         if (value == null && annotation.required())
         {
-            Assert.fail(MessageFormat.format("No pattern value provided for ''{0}''", propertyLookup.getEffectiveKey(annotation.key())));
+            Assert.fail(MessageFormat.format("No pattern value provided for ''{0}''",
+                    propertyLookup.getEffectiveKey(annotation.key())));
         }
 
         return RegExUtils.getPattern(value);
     }
 
     /**
-     * Try to deal with nested classes, so that we can also configure custom classes the way the
-     * enum type already does it.
+     * Try to deal with nested classes, so that we can also configure custom classes
+     * the way the enum type already does it.
      *
-     * @param annotation
-     *            the annotation to process
-     * @param index
-     *            the current index position
+     * @param annotation the annotation to process
+     * @param index      the current index position
      *
-     * @return the looked up object value as left part of the pair and its weight (Integer value) as
-     *         right part
+     * @return the looked up object value as left part of the pair and its weight
+     *         (Integer value) as right part
      */
     private <T> T handleNestedPropertyClazz(final Property annotation, final Class<T> clazz)
     {

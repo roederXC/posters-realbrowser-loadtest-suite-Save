@@ -5,7 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * Component interface.
  * <p>
- * Components are part of pages and provide the required functionality needed by the page.
+ * Components are part of pages and provide the required functionality needed by
+ * the page.
  *
  * @author Xceptance Software Technologies
  */

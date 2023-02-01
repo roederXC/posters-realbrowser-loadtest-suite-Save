@@ -7,7 +7,8 @@ package com.xceptance.loadtest.api.data;
  */
 public enum AccountOrigin
 {
-    RANDOM("RANDOM"), POOL("POOL"), FILE("FILE"), PROPERTIES("PROPERTIES"), OVERRIDE("OVERRIDE"), EXCLUSIVE("EXCLUSIVE");
+    RANDOM("RANDOM"), POOL("POOL"), FILE("FILE"), PROPERTIES("PROPERTIES"), OVERRIDE("OVERRIDE"),
+    EXCLUSIVE("EXCLUSIVE");
 
     /**
      * Plain text account origin.

@@ -1,7 +1,7 @@
 package com.xceptance.loadtest.api.events;
 
 /**
- * Event logger interface structuring different types of logging events.  
+ * Event logger interface structuring different types of logging events.
  * 
  * @author Xceptance Software Technologies
  */

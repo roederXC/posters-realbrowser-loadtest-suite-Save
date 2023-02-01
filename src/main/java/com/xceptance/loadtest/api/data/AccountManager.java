@@ -9,7 +9,7 @@ import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.xlt.api.data.DataPool;
 
 /**
- * Account manager. 
+ * Account manager.
  *
  * @author Xceptance Software Technologies
  */
@@ -26,12 +26,14 @@ public class AccountManager
     private final DataPool<Account> accounts;
 
     /**
-     * The account pool is initialized with a configured size and expiration rate. In this case the account reusage
-     * probability is the base to determine the expiration rate. If not set, all accounts will expire.
+     * The account pool is initialized with a configured size and expiration rate.
+     * In this case the account reusage probability is the base to determine the
+     * expiration rate. If not set, all accounts will expire.
      */
     private AccountManager()
     {
-        // Initial data pool with configured pool size and expiration rate to control percentage of reusable accounts.
+        // Initial data pool with configured pool size and expiration rate to control
+        // percentage of reusable accounts.
         final int size = Context.configuration().accountPoolSize;
         final int reusageProbability = Context.configuration().accountPoolReuseProbability.raw;
 
@@ -56,8 +58,7 @@ public class AccountManager
     /**
      * Adds the given account to the pool. Will complain if the account is empty
      *
-     * @param account
-     *            an account
+     * @param account an account
      */
     public void addAccount(final Optional<Account> account)
     {
@@ -65,8 +66,8 @@ public class AccountManager
     }
 
     /**
-     * Get us an account, either from the pool if any in the pool or a fresh one according to the
-     * config of the context we are in.
+     * Get us an account, either from the pool if any in the pool or a fresh one
+     * according to the config of the context we are in.
      *
      * @return new account as optional
      */
@@ -83,9 +84,10 @@ public class AccountManager
             return Optional.of(AccountSupplierManager.getAccount());
         }
     }
-    
+
     /**
-     * Get us an account from a file. 
+     * Get us an account from a file.
+     * 
      * @param exclusive determine if the account should be exclusive or not
      * @return new account as optional, Optional.empty() otherwise
      */
@@ -106,17 +108,16 @@ public class AccountManager
     }
 
     /**
-     * Returns the account to the pool, or add it back to the ExculsiveDataProvider. It will return and empty optional as kind of confirmation
+     * Returns the account to the pool, or add it back to the ExculsiveDataProvider.
+     * It will return and empty optional as kind of confirmation
      *
-     * @param account
-     *            account to return, will fail of the account was empty
+     * @param account account to return, will fail of the account was empty
      * @return an empty optional
-     * @throws Exception 
+     * @throws Exception
      */
     public static Optional<Account> returnAccount(final Optional<Account> account) throws Exception
     {
-        if (!AccountOrigin.FILE.equals(account.get().origin) &&
-            !AccountOrigin.EXCLUSIVE.equals(account.get().origin))
+        if (!AccountOrigin.FILE.equals(account.get().origin) && !AccountOrigin.EXCLUSIVE.equals(account.get().origin))
         {
             final AccountManager mgr = getInstance(Context.configuration().accountPoolSiteSeparator);
             mgr.addAccount(account);
@@ -125,17 +126,17 @@ public class AccountManager
         {
             DataSupplier.releaseExclusiveAccount(account);
         }
-        
+
         return Optional.empty();
     }
 
     /**
-     * Returns the account manager mapped to the given key. Use {@link #getInstance()} instead if a
-     * single globally shared account manager is all you need.
+     * Returns the account manager mapped to the given key. Use
+     * {@link #getInstance()} instead if a single globally shared account manager is
+     * all you need.
      *
-     * @param key
-     *            The key the account manager is bound to. If the key is <code>null</code> the
-     *            unmapped global account manager is returned.
+     * @param key The key the account manager is bound to. If the key is
+     *            <code>null</code> the unmapped global account manager is returned.
      * @return account manager instance
      */
     public static AccountManager getInstance(final String key)

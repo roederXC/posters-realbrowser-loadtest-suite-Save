@@ -27,8 +27,7 @@ public class ConfigProbability
     /**
      * The constructor
      *
-     * @param probability
-     *            a value between 0 and 100 hopefully
+     * @param probability a value between 0 and 100 hopefully
      */
     private ConfigProbability(final String probability)
     {
@@ -56,8 +55,7 @@ public class ConfigProbability
     /**
      * Execute the provided runnable
      *
-     * @param runnable
-     *            code to be executed when the value is true
+     * @param runnable code to be executed when the value is true
      */
     public void random(final Runnable runnable)
     {
@@ -70,8 +68,7 @@ public class ConfigProbability
     /**
      * Execute the provided supplier and return something
      *
-     * @param supplier
-     *            code to be executed when the value is true
+     * @param supplier code to be executed when the value is true
      * @return returns the data from the supplier
      */
     public <T> Optional<T> random(final Supplier<T> supplier)
@@ -104,8 +101,7 @@ public class ConfigProbability
         /*
          * (non-Javadoc)
          *
-         * @see
-         * com.xceptance.xlt.loadtest.util.configuration.ConfigList#random()
+         * @see com.xceptance.xlt.loadtest.util.configuration.ConfigList#random()
          */
         @Override
         public boolean random()

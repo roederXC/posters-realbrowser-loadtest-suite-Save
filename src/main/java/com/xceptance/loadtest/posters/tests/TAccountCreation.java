@@ -8,23 +8,24 @@ import com.xceptance.loadtest.posters.pages.Homepage;
 
 public class TAccountCreation extends LoadTestCase
 {
-	/**
-	 * Open the landing page, go to account creation and create a new account
-	 */
+    /**
+     * Open the landing page, go to account creation and create a new account
+     */
+    @Override
     public void test()
     {
         // Flag test case that we need a registered account
         Context.requiresRegisteredAccount(true);
-        
+
         Context.get().data.attachAccount();
-        
-    	// loads the homepage, data needed is taking from the properties automatically
-    	// using the Context as well as the attached configuration.
-    	Homepage.open();
-    	
-    	// Register new user
-    	GeneralPage.openCreateNewAccount();
-    	CreateAccountPage.fillAccountForm();
-    	CreateAccountPage.submitForm();        	        
+
+        // loads the homepage, data needed is taking from the properties automatically
+        // using the Context as well as the attached configuration.
+        Homepage.open();
+
+        // Register new user
+        GeneralPage.openCreateNewAccount();
+        CreateAccountPage.fillAccountForm();
+        CreateAccountPage.submitForm();
     }
 }

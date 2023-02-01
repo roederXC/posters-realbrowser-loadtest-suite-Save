@@ -5,13 +5,14 @@ import com.xceptance.loadtest.posters.pages.Homepage;
 
 public class TVisit extends LoadTestCase
 {
-	/**
-	 * Just open the homepage.
-	 */
+    /**
+     * Just open the homepage.
+     */
+    @Override
     public void test()
     {
-    	// loads the homepage, data needed is taking from the properties automatically
-    	// using the Context as well as the attached configuration.
-    	Homepage.open();
+        // loads the homepage, data needed is taking from the properties automatically
+        // using the Context as well as the attached configuration.
+        Homepage.open();
     }
 }

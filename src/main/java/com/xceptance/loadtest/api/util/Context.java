@@ -38,13 +38,14 @@ public class Context
     private static final Map<ThreadGroup, Context> CONTEXTS = new ConcurrentHashMap<>(101);
 
     /**
-     * The Configuration for the current thread, wrapped and buffered from the properties.
+     * The Configuration for the current thread, wrapped and buffered from the
+     * properties.
      */
     public final Configuration configuration;
 
     /**
-    /**
-     * Test data of the current execution to better isolate that from the context
+     * /** Test data of the current execution to better isolate that from the
+     * context
      */
     public final TestData data = new TestData();
 
@@ -60,23 +61,17 @@ public class Context
      * The current WebDriver instance.
      */
     private WebDriver webDriver;
-    
+
     /**
      * Constructor; Creates a new Context for a TestCase.
      *
-     * @param xltProperties
-     *            the initial set of XLT properties
-     * @param userName
-     *            the currently running user
-     * @param fullTestClassName
-     *            test name
-     * @param site
-     *            site context
+     * @param xltProperties     the initial set of XLT properties
+     * @param userName          the currently running user
+     * @param fullTestClassName test name
+     * @param site              site context
      */
-    private Context(final XltProperties xltProperties,
-                    final String userName,
-                    final String fullTestClassName,
-                    final Site site)
+    private Context(final XltProperties xltProperties, final String userName, final String fullTestClassName,
+            final Site site)
     {
         // where we get the props from later in this code
         final LTProperties totalProperties = new LTProperties(userName, fullTestClassName, site.id);
@@ -89,7 +84,8 @@ public class Context
         {
             // ### Get us sites.yaml and other more global structured properties first
 
-            // ok, we have custom properties in YAML, get them before we do the configuration magic
+            // ok, we have custom properties in YAML, get them before we do the
+            // configuration magic
             final String fileNames = xltProperties.getProperty("general.properties.yaml.global.files", "");
             for (final String fileName : fileNames.split("\\s|,|;"))
             {
@@ -122,7 +118,8 @@ public class Context
             // get XLT all our look up data so it is also up to date
             XltProperties.getInstance().setProperties(totalProperties.properties);
 
-            // now, we can do what we always do, because all YAML stuff is available as regular
+            // now, we can do what we always do, because all YAML stuff is available as
+            // regular
             // properties
             this.configuration = new ConfigurationBuilder(totalProperties).build(Configuration.class);
         }
@@ -162,20 +159,19 @@ public class Context
     }
 
     /**
-     * Adds a new Context instance for the current Thread to the map. This Method is used by the
-     * AbstractTestCase and therefore won't need to be called manually
+     * Adds a new Context instance for the current Thread to the map. This Method is
+     * used by the AbstractTestCase and therefore won't need to be called manually
      *
-     * @param fullTestClassName
-     *            the name of the test case for property identification
-     * @param site
-     *            site context
+     * @param fullTestClassName the name of the test case for property
+     *                          identification
+     * @param site              site context
      */
-    public static void createContext(final XltProperties xltProperties, final String userName, final String fullTestClassName, final Site site)
+    public static void createContext(final XltProperties xltProperties, final String userName,
+            final String fullTestClassName, final Site site)
     {
         // NOTE: previous added Context instances for this Thread will be ignored
-        CONTEXTS.put(
-                        Thread.currentThread().getThreadGroup(),
-                        new Context(xltProperties, userName, fullTestClassName, site));
+        CONTEXTS.put(Thread.currentThread().getThreadGroup(),
+                new Context(xltProperties, userName, fullTestClassName, site));
     }
 
     /**
@@ -187,8 +183,7 @@ public class Context
         try
         {
             get().logRerunData();
-        }
-        catch (final Throwable e)
+        } catch (final Throwable e)
         {
             XltLogger.runTimeLogger.error("Error during debug info logging", e);
         }
@@ -197,8 +192,7 @@ public class Context
         try
         {
             get().data.releaseAccount();
-        }
-        catch (final Throwable e)
+        } catch (final Throwable e)
         {
             XltLogger.runTimeLogger.error("Error during release of account", e);
         }
@@ -208,7 +202,8 @@ public class Context
     }
 
     /**
-     * Executed before the release of the context. Includes handling for additional debug logging.
+     * Executed before the release of the context. Includes handling for additional
+     * debug logging.
      */
     private void logRerunData()
     {
@@ -218,7 +213,8 @@ public class Context
             final StringBuilder out = new StringBuilder(1024);
 
             // Test rerun information.
-            out.append("\n\nIf you want to rerun this testcase, insert the following lines into your config/dev.properties file: \n\n");
+            out.append(
+                    "\n\nIf you want to rerun this testcase, insert the following lines into your config/dev.properties file: \n\n");
 
             // Account information
             final Optional<Account> attachedAccount = data.getAccount();
@@ -229,11 +225,13 @@ public class Context
                 final String siteId = getSite().getId();
                 out.append("account.").append(siteId).append(".email = ").append(account.email).append("\n");
                 out.append("account.").append(siteId).append(".password = ").append(account.password).append("\n");
-                out.append("account.").append(siteId).append(".isRegistered = ").append(account.isRegistered).append("\n");
+                out.append("account.").append(siteId).append(".isRegistered = ").append(account.isRegistered)
+                        .append("\n");
             }
 
             // Randomizer initialization value.
-            out.append(XltConstants.RANDOM_INIT_VALUE_PROPERTY).append(" = ").append(XltRandom.getSeed()).append("\n\n");
+            out.append(XltConstants.RANDOM_INIT_VALUE_PROPERTY).append(" = ").append(XltRandom.getSeed())
+                    .append("\n\n");
 
             if (Boolean.parseBoolean(configuration().properties.getProperty("randomInitValueWasSet")))
             {
@@ -256,7 +254,8 @@ public class Context
     /**
      * Runs the current test case a registered customer scenario?
      *
-     * @return <code>true</code> if the current test case a registered customer scenario, <code>false</code> otherwise
+     * @return <code>true</code> if the current test case a registered customer
+     *         scenario, <code>false</code> otherwise
      */
     public static boolean requiresRegisteredAccount()
     {
@@ -277,11 +276,11 @@ public class Context
     // Load Default Configuration
     /////////////////////////////////////////////////////////////////
 
-    public static ThreadLocal<DefaultConfiguration> defaultConfiguration = new ThreadLocal<DefaultConfiguration>()    
+    public static ThreadLocal<DefaultConfiguration> defaultConfiguration = new ThreadLocal<DefaultConfiguration>()
     {
-    	private DefaultConfiguration defaultConfiguration;
-    	
-    	@Override
+        private DefaultConfiguration defaultConfiguration;
+
+        @Override
         public DefaultConfiguration get()
         {
             if (defaultConfiguration == null)
@@ -299,16 +298,16 @@ public class Context
     };
 
     /**
-     * Loads the default non test case dependent configuration. Usually very short. Helps to do
-     * something outside of the regular context
+     * Loads the default non test case dependent configuration. Usually very short.
+     * Helps to do something outside of the regular context
      *
      * @return the default configuration
      */
     private static DefaultConfiguration loadDefaultConfiguration()
     {
-    	// save random seed
+        // save random seed
         final long savedSeed = XltRandom.getSeed();
-    	
+
         // where we get the props from later in this code
         final LTProperties totalProperties = new LTProperties("", "", "");
 
@@ -323,14 +322,17 @@ public class Context
         {
             // ### Get us sites.yaml and other more global structured properties first
 
-            // ok, we have custom properties in YAML, get them before we do the configuration magic
-            final String fileNames = XltProperties.getInstance().getProperty("general.properties.yaml.global.files", "");
+            // ok, we have custom properties in YAML, get them before we do the
+            // configuration magic
+            final String fileNames = XltProperties.getInstance().getProperty("general.properties.yaml.global.files",
+                    "");
             for (final String fileName : fileNames.split("\\s|,|;"))
             {
                 // don't try empty
                 if (fileName.trim().length() > 0)
                 {
-                    final Optional<Properties> newProperties = YamlPropertiesBuilder.build("DEFAULTCONFIGUATION", fileName);
+                    final Optional<Properties> newProperties = YamlPropertiesBuilder.build("DEFAULTCONFIGUATION",
+                            fileName);
                     if (newProperties.isPresent())
                     {
                         totalProperties.addProperties(newProperties);
@@ -338,22 +340,23 @@ public class Context
                 }
             }
 
-            // now, we can do what we always do, because all YAML stuff is available as regular
+            // now, we can do what we always do, because all YAML stuff is available as
+            // regular
             // properties
             defaultConfiguaration = new ConfigurationBuilder(totalProperties).build(DefaultConfiguration.class);
         }
-        
+
         cdl.stopAndLog();
-        
+
         // restore seed for proper reproducibility
         XltRandom.setSeed(savedSeed);
 
         // keep them for later
         return defaultConfiguaration;
     }
-    
+
     // Extendeds functionality
-    
+
     /**
      * Sets the current page. This is a convince shortcut to data
      *
@@ -361,7 +364,8 @@ public class Context
      */
     public static void setCurrentPage(Page page)
     {
-        get().data.setCurrentPage(page);;
+        get().data.setCurrentPage(page);
+        ;
     }
 
     /**
@@ -373,7 +377,7 @@ public class Context
     {
         return get().data.getCurrentPage();
     }
-    
+
     /**
      * Retrieves the current page as given type. This is a convince shortcut to data
      *
@@ -383,11 +387,13 @@ public class Context
     {
         return get().data.getCurrentPageAs(type);
     }
-    
+
     /**
-     * Indicates the begin of an action and hence the beginning of an action measurement period.
+     * Indicates the begin of an action and hence the beginning of an action
+     * measurement period.
      * <p>
-     * Will only start an action if action timing is enabled. With each start of an action, the previously running action is stopped.
+     * Will only start an action if action timing is enabled. With each start of an
+     * action, the previously running action is stopped.
      */
     public static void startAction(String actionName)
     {
@@ -395,9 +401,11 @@ public class Context
     }
 
     /**
-     * Indicates the begin of an action and hence the beginning of an action measurement period and attaches a post fix to this action (e.g. NPV).
+     * Indicates the begin of an action and hence the beginning of an action
+     * measurement period and attaches a post fix to this action (e.g. NPV).
      * <p>
-     * Will only start an action if action timing is enabled. With each start of an action, the previously running action is stopped.
+     * Will only start an action if action timing is enabled. With each start of an
+     * action, the previously running action is stopped.
      */
     public static void startAction(String actionName, String postFix)
     {
@@ -412,18 +420,19 @@ public class Context
         // Extend action name by site identifier if not default
         String siteIdentifier = get().data.getSite().id;
         fullActionName += "_" + siteIdentifier;
-        
+
         Session.getCurrent().startAction(fullActionName);
     }
 
     /**
-     * Indicates the end of an action and hence the end of an action measurement period. Will only stop an action if action timing is enabled.
+     * Indicates the end of an action and hence the end of an action measurement
+     * period. Will only stop an action if action timing is enabled.
      */
     public static void stopAction()
     {
         Session.getCurrent().stopAction();
     }
-    
+
     /**
      * Sets the WebDriver instance.
      *

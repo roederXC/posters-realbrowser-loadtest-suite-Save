@@ -13,8 +13,8 @@ import com.xceptance.xlt.api.util.XltRandom;
 public class Email
 {
     /**
-     * Returns a random email address using the internal random generator to make it predictable if
-     * desired, if not, it goes for UUID
+     * Returns a random email address using the internal random generator to make it
+     * predictable if desired, if not, it goes for UUID
      *
      * @return random email
      */
@@ -24,11 +24,10 @@ public class Email
     }
 
     /**
-     * Returns a random email address using the internal random generator to make it predictable if
-     * desired, if not, it goes for UUID
+     * Returns a random email address using the internal random generator to make it
+     * predictable if desired, if not, it goes for UUID
      *
-     * @param stronglyRandom
-     *            if true, go for UUID instead of XltRandom
+     * @param stronglyRandom if true, go for UUID instead of XltRandom
      * @return random email
      */
     public static String randomEmail(final boolean stronglyRandom)

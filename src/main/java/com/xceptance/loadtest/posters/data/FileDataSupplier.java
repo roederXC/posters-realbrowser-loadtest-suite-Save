@@ -6,22 +6,23 @@ import com.xceptance.loadtest.api.data.DataSupplier;
 import com.xceptance.loadtest.api.data.Tuple;
 import com.xceptance.loadtest.api.util.Context;
 
-public class FileDataSupplier 
+public class FileDataSupplier
 {
     /**
      * Get us some search data with expected counts
-     * @return Tuple with: 
-     * <br> - valueA = search phrase 
-     * <br> - valueB = expected item count
+     * 
+     * @return Tuple with: <br>
+     *         - valueA = search phrase <br>
+     *         - valueB = expected item count
      */
     public static Tuple<String, String> searchPhraseWithResult()
     {
         var s = DataSupplier.randomString(DataSupplier.getSourceList(Context.configuration().dataFileSearchPhrases));
         var splitString = s.split(",");
-        
+
         // make sure we have two things
         Assert.assertEquals(2, splitString.length);
-        
+
         return new Tuple<String, String>(splitString[0], splitString[1]);
     }
 }

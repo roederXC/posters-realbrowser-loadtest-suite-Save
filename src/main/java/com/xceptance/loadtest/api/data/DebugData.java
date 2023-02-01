@@ -25,8 +25,7 @@ public class DebugData
     /**
      * Add a level to the stack
      *
-     * @param name
-     *            the new level name
+     * @param name the new level name
      * @return the new level depth
      */
     public int pushLevel(final String name)
@@ -57,8 +56,7 @@ public class DebugData
     /**
      * Set a new timer name that expresses the depth and other things
      *
-     * @param a
-     *            name supplier
+     * @param a name supplier
      * @return a new name
      */
     public String adjustTimerName(final Supplier<String> name)
@@ -67,8 +65,8 @@ public class DebugData
     }
 
     /**
-     * Returns the right instance, either the load test one or the development one This will save is
-     * a lot of "if loadtest" lines
+     * Returns the right instance, either the load test one or the development one
+     * This will save is a lot of "if loadtest" lines
      */
     public static DebugData getInstance()
     {
@@ -87,9 +85,9 @@ public class DebugData
 /**
  * Debug information tracking.
  * 
- * This is the instance that holds the actual logic, hence if we forget to implement it the load test
- * will work fine because the compile will force us to make sure that DebugData has the right
- * methods.
+ * This is the instance that holds the actual logic, hence if we forget to
+ * implement it the load test will work fine because the compile will force us
+ * to make sure that DebugData has the right methods.
  *
  * @author Xceptance Software Technologies
  */
@@ -107,8 +105,7 @@ class DevelopmentDebugData extends DebugData
     /**
      * Add a level to the stack
      *
-     * @param name
-     *            the new level name
+     * @param name the new level name
      * @return the new level depth
      */
     @Override
@@ -144,8 +141,7 @@ class DevelopmentDebugData extends DebugData
     /**
      * Set a new timer name that expresses the depth and other things
      *
-     * @param a
-     *            name supplier
+     * @param a name supplier
      * @return a new name
      */
     @Override
