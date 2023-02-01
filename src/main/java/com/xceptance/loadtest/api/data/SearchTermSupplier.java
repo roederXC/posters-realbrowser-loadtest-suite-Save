@@ -20,37 +20,37 @@ import com.xceptance.xlt.api.util.XltRandom;
 /**
  * Data supplier for search terms.
  * 
- * A new search data provider that is able to come up with alternative search phrases based on
- * search phrases given.
+ * A new search data provider that is able to come up with alternative search
+ * phrases based on search phrases given.
  *
  * @author Xceptance Software Technologies
  */
 public class SearchTermSupplier
 {
     /**
-     * Keep our data loaded and shared based on the site key and they type. We set concurrency for
-     * write low but still harvest good read performance
+     * Keep our data loaded and shared based on the site key and they type. We set
+     * concurrency for write low but still harvest good read performance
      */
     private final static ConcurrentHashMap<String, List<String>> data = new ConcurrentHashMap<>(1);
 
     /**
-     * Get a search phrase that will not have a hit, either from a predefined list or random values
-     * when the list is not set
+     * Get a search phrase that will not have a hit, either from a predefined list
+     * or random values when the list is not set
      *
      * @return search phrase that will no produce a result
      */
     public static String getTermWithoutHits()
     {
         return Context.configuration().searchNoHitsTerms.isEmpty()
-                        ? RandomStringUtils.randomAlphabetic(XltRandom.nextInt(10, 20)) + " " + RandomStringUtils.randomAlphabetic(XltRandom.nextInt(10, 20))
-                        : Context.configuration().searchNoHitsTerms.random();
+                ? RandomStringUtils.randomAlphabetic(XltRandom.nextInt(10, 20)) + " "
+                        + RandomStringUtils.randomAlphabetic(XltRandom.nextInt(10, 20))
+                : Context.configuration().searchNoHitsTerms.random();
     }
 
     /**
      * Get a random row and if set, derive a similar phrase from it
      *
-     * @param derive
-     *            should we derive
+     * @param derive should we derive
      * @return a search phrase that might be derived or is the original one
      */
     public static String getTermWithHit()
@@ -69,33 +69,33 @@ public class SearchTermSupplier
 
         String newPhrase = originalPhrase;
 
-        switch (XltRandom.nextInt(5)) {
-            case 0:
-                newPhrase = adjustCasing(originalPhrase);
-                break;
-            case 1:
-                newPhrase = adjustWordCasing(originalPhrase);
-                break;
-            case 2:
-                newPhrase = changeWhiteSpaces(originalPhrase);
-                break;
-            case 3:
-                newPhrase = changeWhiteSpaces(adjustCasing(originalPhrase));
-                break;
-            case 4:
-                newPhrase = changeWhiteSpaces(adjustWordCasing(originalPhrase));
-                break;
+        switch (XltRandom.nextInt(5))
+        {
+        case 0:
+            newPhrase = adjustCasing(originalPhrase);
+            break;
+        case 1:
+            newPhrase = adjustWordCasing(originalPhrase);
+            break;
+        case 2:
+            newPhrase = changeWhiteSpaces(originalPhrase);
+            break;
+        case 3:
+            newPhrase = changeWhiteSpaces(adjustCasing(originalPhrase));
+            break;
+        case 4:
+            newPhrase = changeWhiteSpaces(adjustWordCasing(originalPhrase));
+            break;
         }
 
         return newPhrase;
     }
 
     /**
-     * Change casing completely. Either all lower case or all uppercase, depending on the input. If
-     * the input is mixed case, we get always uppercase.
+     * Change casing completely. Either all lower case or all uppercase, depending
+     * on the input. If the input is mixed case, we get always uppercase.
      *
-     * @param original
-     *            to be changed string
+     * @param original to be changed string
      * @return new string with fully changed casing
      */
     private static String adjustCasing(final String original)
@@ -115,8 +115,7 @@ public class SearchTermSupplier
     /**
      * Uppercase words, make sure it is lowercase before
      *
-     * @param original
-     *            to be changed string
+     * @param original to be changed string
      * @return new string with uppercased words
      */
     private static String adjustWordCasing(final String original)
@@ -125,10 +124,10 @@ public class SearchTermSupplier
     }
 
     /**
-     * Fancy up the white spaces by adding double whites or some front and end spaces
+     * Fancy up the white spaces by adding double whites or some front and end
+     * spaces
      *
-     * @param original
-     *            to be changed string
+     * @param original to be changed string
      * @return new string with different white spacing
      */
     private static String changeWhiteSpaces(final String original)
@@ -161,7 +160,8 @@ public class SearchTermSupplier
             }
         }
 
-        // if we have not touched it, just append a space at the end to make sure we always change
+        // if we have not touched it, just append a space at the end to make sure we
+        // always change
         // at least this
         // otherwise try random here as well
         if (!wasChanged || XltRandom.nextBoolean(LOCALPROBABILITY / 2))
@@ -175,8 +175,7 @@ public class SearchTermSupplier
     /**
      * Return a term based on the current site config
      *
-     * @param filename
-     *            file to open in the hierarchy
+     * @param filename file to open in the hierarchy
      * @return a search term with a hit from that file
      */
     private static String getTerm(final String filename)
@@ -186,7 +185,8 @@ public class SearchTermSupplier
         // get us a key, just use
         final String key = site.toString() + File.separator + filename;
 
-        final List<String> list = data.computeIfAbsent(key, k -> {
+        final List<String> list = data.computeIfAbsent(key, k ->
+        {
             // load the data otherwise break
             final Optional<File> file = DataFileProvider.dataFileBySite(site, filename);
 
@@ -194,16 +194,11 @@ public class SearchTermSupplier
             {
                 try
                 {
-                    return Files.readAllLines(file.get().toPath())
-                                    .stream()
-                                    .map(s -> s.trim())
-                                    .filter(s ->
-                                    {
-                                        return s.length() > 0 && !s.startsWith("#");
-                                    })
-                                    .collect(Collectors.toList());
-                }
-                catch (final IOException e)
+                    return Files.readAllLines(file.get().toPath()).stream().map(s -> s.trim()).filter(s ->
+                    {
+                        return s.length() > 0 && !s.startsWith("#");
+                    }).collect(Collectors.toList());
+                } catch (final IOException e)
                 {
                     // we will get to the assertion
                 }
@@ -222,8 +217,7 @@ public class SearchTermSupplier
     /**
      * Return all terms based on the current site config
      *
-     * @param filename
-     *            file to open in the hierarchy
+     * @param filename file to open in the hierarchy
      * @return a search term with a hit from that file
      */
     public static List<String> getAllTerms()
@@ -243,16 +237,11 @@ public class SearchTermSupplier
             {
                 try
                 {
-                    return Files.readAllLines(file.get().toPath())
-                                    .stream()
-                                    .map(s -> s.trim())
-                                    .filter(s ->
-                                    {
-                                        return s.length() > 0 && !s.startsWith("#");
-                                    })
-                                    .collect(Collectors.toList());
-                }
-                catch (final IOException e)
+                    return Files.readAllLines(file.get().toPath()).stream().map(s -> s.trim()).filter(s ->
+                    {
+                        return s.length() > 0 && !s.startsWith("#");
+                    }).collect(Collectors.toList());
+                } catch (final IOException e)
                 {
                     // we will get to the assertion
                 }

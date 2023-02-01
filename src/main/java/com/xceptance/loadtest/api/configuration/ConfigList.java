@@ -90,7 +90,9 @@ public class ConfigList
             super(value, delimiter);
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see com.xceptance.xlt.loadtest.util.configuration.ConfigList#random()
          */
         @Override
@@ -119,6 +121,7 @@ public class ConfigList
     public String toString()
     {
         final int maxLen = 10;
-        return "ConfigList [raw=" + (list != null ? list.subList(0, Math.min(list.size(), maxLen)) : null) + ", value=" + value + "]";
+        return "ConfigList [raw=" + (list != null ? list.subList(0, Math.min(list.size(), maxLen)) : null) + ", value="
+                + value + "]";
     }
 }

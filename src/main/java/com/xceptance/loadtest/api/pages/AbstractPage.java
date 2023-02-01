@@ -9,6 +9,7 @@ public abstract class AbstractPage implements Page
 {
     public void initialize()
     {
-        // Intentionally left empty, subclasses can override if page specific initialization code is required
+        // Intentionally left empty, subclasses can override if page specific
+        // initialization code is required
     }
 }

@@ -43,14 +43,18 @@ public class Action
             {
                 waitForScreenToSettle(name);
             }
-        }
-        finally
+        } finally
         {
             StaticScriptCommands.stopAction();
 
-            // final int a = XltProperties.getInstance().getProperty("com.xceptance.xlt.thinktime.action", 0);
-            // final int b = XltProperties.getInstance().getProperty("com.xceptance.xlt.thinktime.action.deviation", 0);
-            // final long resultingThinkTime = Math.max(0, XltRandom.nextIntWithDeviation(a, b));
+            // final int a =
+            // XltProperties.getInstance().getProperty("com.xceptance.xlt.thinktime.action",
+            // 0);
+            // final int b =
+            // XltProperties.getInstance().getProperty("com.xceptance.xlt.thinktime.action.deviation",
+            // 0);
+            // final long resultingThinkTime = Math.max(0, XltRandom.nextIntWithDeviation(a,
+            // b));
             // try
             // {
             // Thread.sleep(resultingThinkTime);
@@ -86,8 +90,7 @@ public class Action
                 waitForScreenToSettle(name);
             }
             return t;
-        }
-        finally
+        } finally
         {
             StaticScriptCommands.stopAction();
         }
@@ -101,8 +104,7 @@ public class Action
             {
                 return ((TakesScreenshot) Context.getWebDriver()).getScreenshotAs(OutputType.BYTES);
             });
-        }
-        catch (final Throwable e)
+        } catch (final Throwable e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -132,19 +134,15 @@ public class Action
                 try
                 {
                     Thread.sleep(200);
-                }
-                catch (final InterruptedException e)
+                } catch (final InterruptedException e)
                 {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
                 s2 = takeScreenshot(name);
-            }
-            while (Arrays.equals(s1, s2) == false);
+            } while (Arrays.equals(s1, s2) == false);
         });
     }
-
-
 
 }

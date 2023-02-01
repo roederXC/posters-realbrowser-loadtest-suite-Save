@@ -18,8 +18,7 @@ public class CustomDataLogger
     /**
      * Don't make it accessible from the outside
      *
-     * @param name
-     *            the name to use later
+     * @param name the name to use later
      */
     private CustomDataLogger(final String name)
     {
@@ -29,8 +28,7 @@ public class CustomDataLogger
     /**
      * Start a new logger
      *
-     * @param name
-     *            the name to use
+     * @param name the name to use
      * @return this logger with a ticking clock
      */
     public static CustomDataLogger start(final String name)
@@ -89,12 +87,9 @@ public class CustomDataLogger
     /**
      * Log custom data
      *
-     * @param name
-     *            the name to log
-     * @param runtime
-     *            self measured runtime
-     * @param failed
-     *            was that a failed measurement
+     * @param name    the name to log
+     * @param runtime self measured runtime
+     * @param failed  was that a failed measurement
      */
     public static void log(final String name, final long runtime, final boolean failed)
     {
@@ -109,10 +104,8 @@ public class CustomDataLogger
     /**
      * Log custom data that was successful
      *
-     * @param name
-     *            the name to log
-     * @param runtime
-     *            self measured runtime
+     * @param name    the name to log
+     * @param runtime self measured runtime
      */
     public static void log(final String name, final long runtime)
     {
@@ -120,13 +113,11 @@ public class CustomDataLogger
     }
 
     /**
-     * Functional interface for logging custom data runtimes. Just more elegant in the code but not
-     * suitable for everything due to the scope of the code block.
+     * Functional interface for logging custom data runtimes. Just more elegant in
+     * the code but not suitable for everything due to the scope of the code block.
      *
-     * @param name
-     *            the name of the custom data
-     * @param task
-     *            the task to measure
+     * @param name the name of the custom data
+     * @param task the task to measure
      */
     public static void log(final String name, final Runnable task)
     {
@@ -135,26 +126,23 @@ public class CustomDataLogger
         try
         {
             task.run();
-        }
-        catch (final Error e)
+        } catch (final Error e)
         {
             cd.setFailed(false);
             throw e;
-        }
-        finally
+        } finally
         {
             cd.setRunTime();
             Session.getCurrent().getDataManager().logDataRecord(cd);
         }
     }
-   
+
     /**
-     * Functional interface for logging custom data runtimes. Just more elegant in the code but not suitable for everything due to the scope of the code block.
+     * Functional interface for logging custom data runtimes. Just more elegant in
+     * the code but not suitable for everything due to the scope of the code block.
      *
-     * @param name
-     *            the name of the custom data
-     * @param task
-     *            the task to measure
+     * @param name the name of the custom data
+     * @param task the task to measure
      * @return the result of the task, because it is a supplier
      */
     public static <R> R log(final String name, final Supplier<R> task) throws Throwable
@@ -164,13 +152,11 @@ public class CustomDataLogger
         try
         {
             return task.get();
-        }
-        catch (final Error e)
+        } catch (final Error e)
         {
             cd.setFailed(false);
             throw e;
-        }
-        finally
+        } finally
         {
             cd.setRunTime();
             Session.getCurrent().getDataManager().logDataRecord(cd);

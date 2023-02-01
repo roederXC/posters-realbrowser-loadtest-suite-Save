@@ -69,7 +69,8 @@ public class Account implements Initable
     public Address alternativeAddress;
 
     /**
-     * Optional value for orderID's, if this account is used for order history scenarios.
+     * Optional value for orderID's, if this account is used for order history
+     * scenarios.
      */
     @Property(key = "orderID", required = false)
     public String orderID;
@@ -95,8 +96,8 @@ public class Account implements Initable
     private int secondaryCreditCardIndex = -1;
 
     /**
-     * Create generic generated account. This account will be based on the configured account (email
-     * address, password, registration state) if any.
+     * Create generic generated account. This account will be based on the
+     * configured account (email address, password, registration state) if any.
      */
     public Account()
     {
@@ -106,7 +107,8 @@ public class Account implements Initable
     @Override
     public void init()
     {
-        // Do we have at least one credit card in our list? If so calculate a random index for one
+        // Do we have at least one credit card in our list? If so calculate a random
+        // index for one
         // of those cards
         final int numberOfCreditCards = creditCards.size();
         if (numberOfCreditCards >= 1)
@@ -114,7 +116,8 @@ public class Account implements Initable
             // pick a random index
             primaryCreditCardIndex = XltRandom.nextInt(0, numberOfCreditCards - 1);
 
-            // If we have at least two credit cards pick another one which is not the same index as
+            // If we have at least two credit cards pick another one which is not the same
+            // index as
             // the first one
             if (numberOfCreditCards >= 2)
             {
@@ -127,8 +130,7 @@ public class Account implements Initable
     /**
      * Fork a new account from the base data
      *
-     * @param f
-     *            a function to fork an account
+     * @param f a function to fork an account
      * @return a new account
      */
     public Account fork(final UnaryOperator<Account> f)
@@ -137,10 +139,10 @@ public class Account implements Initable
     }
 
     /**
-     * Fork a new account from the base data, with the optional interface, for read an data element.
+     * Fork a new account from the base data, with the optional interface, for read
+     * an data element.
      *
-     * @param f
-     *            a function to fork an account
+     * @param f a function to fork an account
      * @return a new account
      */
     public Optional<Account> optFork(final UnaryOperator<Account> f)
@@ -149,16 +151,17 @@ public class Account implements Initable
     }
 
     @Override
-	public String toString() {
-		return "Account [email=" + email + ", login=" + login + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", password=" + password + ", shippingAddress=" + shippingAddress + ", billingAddress="
-				+ billingAddress + ", alternativeAddress=" + alternativeAddress + ", orderID=" + orderID
-				+ ", creditCards=" + creditCards + ", isRegistered=" + isRegistered + ", origin=" + origin + "]";
-	}
+    public String toString()
+    {
+        return "Account [email=" + email + ", login=" + login + ", firstname=" + firstname + ", lastname=" + lastname
+                + ", password=" + password + ", shippingAddress=" + shippingAddress + ", billingAddress="
+                + billingAddress + ", alternativeAddress=" + alternativeAddress + ", orderID=" + orderID
+                + ", creditCards=" + creditCards + ", isRegistered=" + isRegistered + ", origin=" + origin + "]";
+    }
 
-	/**
-     * Returns a random credit card from the list of available credit cards based on a previously
-     * calculated index. The index won't change.
+    /**
+     * Returns a random credit card from the list of available credit cards based on
+     * a previously calculated index. The index won't change.
      */
     public CreditCard getPrimaryCard()
     {
@@ -171,8 +174,8 @@ public class Account implements Initable
     }
 
     /**
-     * Returns another random credit card based on an index. The index of this card is definitely
-     * different from the primary card's index.
+     * Returns another random credit card based on an index. The index of this card
+     * is definitely different from the primary card's index.
      */
     public CreditCard getSecondardyCard()
     {
@@ -183,7 +186,7 @@ public class Account implements Initable
 
         return creditCards.get(secondaryCreditCardIndex);
     }
-    
+
     /**
      * Provides the full name (firstname + lastname).
      * 
@@ -191,6 +194,6 @@ public class Account implements Initable
      */
     public String getFullName()
     {
-    	return firstname + " " + lastname;
+        return firstname + " " + lastname;
     }
 }

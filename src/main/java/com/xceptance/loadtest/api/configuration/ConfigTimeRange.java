@@ -66,7 +66,8 @@ public class ConfigTimeRange
 
             if (StringUtils.isBlank(minString) && StringUtils.isBlank(maxString))
             {
-                throw new IllegalArgumentException(MessageFormat.format("Value is no valid time range pattern: ''{0}' = '{1}''", key, valueString));
+                throw new IllegalArgumentException(MessageFormat
+                        .format("Value is no valid time range pattern: ''{0}' = '{1}''", key, valueString));
             }
 
             // MIN / MAX
@@ -75,7 +76,8 @@ public class ConfigTimeRange
 
             if (min > max)
             {
-                throw new IllegalArgumentException(MessageFormat.format("Time range MAX must be greater than or equals to MIN: ''{0}' = '{1}''", key, valueString));
+                throw new IllegalArgumentException(MessageFormat.format(
+                        "Time range MAX must be greater than or equals to MIN: ''{0}' = '{1}''", key, valueString));
             }
 
             // VALUE
@@ -117,8 +119,7 @@ public class ConfigTimeRange
         try
         {
             return ParseUtils.parseTimePeriod(raw);
-        }
-        catch (final ParseException e)
+        } catch (final ParseException e)
         {
             throw new NumberFormatException(MessageFormat.format("{0} ({1})", e.getMessage(), key));
         }
@@ -139,8 +140,8 @@ public class ConfigTimeRange
     }
 
     /**
-     * We need an upper time limit below Integer.MAX_VALUE, because ranges from
-     * 0 to Integer.MAX_VALUE would lead to problems with Randomizer.
+     * We need an upper time limit below Integer.MAX_VALUE, because ranges from 0 to
+     * Integer.MAX_VALUE would lead to problems with Randomizer.
      */
     private static int upperLimit(final int min)
     {

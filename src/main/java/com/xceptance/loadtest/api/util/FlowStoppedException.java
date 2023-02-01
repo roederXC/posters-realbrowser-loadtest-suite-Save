@@ -17,8 +17,7 @@ public class FlowStoppedException extends Exception
     /**
      * Create the exception with custom message
      * 
-     * @param message
-     *            custom exception message
+     * @param message custom exception message
      */
     public FlowStoppedException(final String message)
     {

@@ -57,10 +57,11 @@ public class Address
     {
     }
 
-	@Override
-	public String toString() {
-		return "Address [id=" + id + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", zip="
-				+ zip + ", phone=" + phone + ", city=" + city + ", stateCode=" + stateCode + ", state=" + state
-				+ ", countryCode=" + countryCode + ", country=" + country + "]";
-	}
+    @Override
+    public String toString()
+    {
+        return "Address [id=" + id + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", zip="
+                + zip + ", phone=" + phone + ", city=" + city + ", stateCode=" + stateCode + ", state=" + state
+                + ", countryCode=" + countryCode + ", country=" + country + "]";
+    }
 }

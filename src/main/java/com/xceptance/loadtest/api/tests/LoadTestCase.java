@@ -18,7 +18,8 @@ import com.xceptance.xlt.api.util.XltProperties;
  *
  * @author Xceptance Software Technologies
  */
-public abstract class LoadTestCase extends com.xceptance.xlt.api.tests.AbstractWebDriverTestCase implements SiteByMarketShare
+public abstract class LoadTestCase extends com.xceptance.xlt.api.tests.AbstractWebDriverTestCase
+        implements SiteByMarketShare
 {
     /**
      * The determined site or an empty optional if not yet done
@@ -42,16 +43,13 @@ public abstract class LoadTestCase extends com.xceptance.xlt.api.tests.AbstractW
         }
 
         // this moved here to make sure we see the exceptions
-        Context.createContext(
-                        XltProperties.getInstance(),
-                        Session.getCurrent().getUserName(),
-                        getClass().getName(),
-                        getSite());
+        Context.createContext(XltProperties.getInstance(), Session.getCurrent().getUserName(), getClass().getName(),
+                getSite());
 
         // Setup Selenide
         SelenideUtil.initializeSelenide(Context.get().configuration, getWebDriver(), Session.getCurrent());
-        
-        // just make it accessible easily 
+
+        // just make it accessible easily
         Context.setWebDriver(getWebDriver());
     }
 
@@ -68,13 +66,12 @@ public abstract class LoadTestCase extends com.xceptance.xlt.api.tests.AbstractW
     /**
      * Test preparation. Nothing to do here by default. Feel free to override.
      *
-     * @throws Throwable
-     *             thrown on error
+     * @throws Throwable thrown on error
      */
     @Before
     public void init() throws Throwable
     {
-    	// Empty
+        // Empty
     }
 
     /**
@@ -89,13 +86,14 @@ public abstract class LoadTestCase extends com.xceptance.xlt.api.tests.AbstractW
         {
             // Execute the main test method.
             test();
-        }
-        catch (final FlowStoppedException e)
+        } catch (final FlowStoppedException e)
         {
-            // If there's a flow stopper, log it. You'll find these entries in the report's 'Events' section.
+            // If there's a flow stopper, log it. You'll find these entries in the report's
+            // 'Events' section.
             EventLogger.DEFAULT.error("FlowStopped - " + Session.getCurrent().getUserName(), e.getMessage());
 
-            // Break in development mode to notice problems but continue in load test mode to not break the complete
+            // Break in development mode to notice problems but continue in load test mode
+            // to not break the complete
             // test.
             if (!Context.isLoadTest)
             {

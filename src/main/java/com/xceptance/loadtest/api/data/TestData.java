@@ -11,7 +11,8 @@ import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.xlt.api.engine.Session;
 
 /**
- * Common data collector for all data required during execution of a test scenario.
+ * Common data collector for all data required during execution of a test
+ * scenario.
  * 
  * A global state supporting scenario execution.
  *
@@ -37,12 +38,12 @@ public class TestData
     // Stores the current quantity count of the cart
     public int cartQuantityCount;
 
-    // Identifies the site the test is targeting 
+    // Identifies the site the test is targeting
     public Site site;
 
     // The current page.
     private Page currentPage;
-    
+
     /**
      * Sets the current page.
      *
@@ -69,7 +70,7 @@ public class TestData
     {
         return currentPage;
     }
-    
+
     /**
      * Retrieves the current page as given type.
      *
@@ -77,10 +78,11 @@ public class TestData
      */
     public <T extends Page> T getCurrentPageAs(Class<T> type)
     {
-        Assert.assertTrue("Failed to retrieve current page as type " + type.getSimpleName(), type.isInstance(currentPage));
+        Assert.assertTrue("Failed to retrieve current page as type " + type.getSimpleName(),
+                type.isInstance(currentPage));
         return type.cast(currentPage);
     }
-    
+
     /**
      * Returns the attached account as optional, so it cannot be empty/null.
      *
@@ -113,7 +115,7 @@ public class TestData
 
         return account;
     }
-    
+
     /**
      * Attaches a customer account to our session/context.
      * 
@@ -140,7 +142,8 @@ public class TestData
     /**
      * Sets the account to use for this test.
      *
-     * @param account The account to use. If set to <code>null</code> a newly generated account will assigned.
+     * @param account The account to use. If set to <code>null</code> a newly
+     *                generated account will assigned.
      */
     public void setAccount(final Optional<Account> account)
     {
@@ -149,16 +152,18 @@ public class TestData
     }
 
     /**
-     * Releases the used account and put it back to the pool for re-usage if possible.
+     * Releases the used account and put it back to the pool for re-usage if
+     * possible.
      * 
-     * @throws Exception 
+     * @throws Exception
      */
     public void releaseAccount() throws Exception
     {
         // Get the current context and account.
         final Optional<Account> account = getAccount();
 
-        // Release the user's exclusively used account if it is a registered account. Guest user
+        // Release the user's exclusively used account if it is a registered account.
+        // Guest user
         // account will be simply dropped.
         if (account.isPresent())
         {

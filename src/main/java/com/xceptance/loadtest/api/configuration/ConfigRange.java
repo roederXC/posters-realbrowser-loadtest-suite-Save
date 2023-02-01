@@ -44,7 +44,8 @@ public class ConfigRange
 
             if (range == null)
             {
-                throw new NumberFormatException(MessageFormat.format("Cannot parse the given range: ''{0}' = '{1}''", key, rangeString));
+                throw new NumberFormatException(
+                        MessageFormat.format("Cannot parse the given range: ''{0}' = '{1}''", key, rangeString));
             }
 
             this.min = range.min;
@@ -89,8 +90,7 @@ public class ConfigRange
         /*
          * (non-Javadoc)
          *
-         * @see
-         * com.xceptance.xlt.loadtest.util.configuration.ConfigList#random()
+         * @see com.xceptance.xlt.loadtest.util.configuration.ConfigList#random()
          */
         @Override
         public int random()
@@ -136,10 +136,8 @@ public class ConfigRange
         /**
          * Do the ranges overlap?
          *
-         * @param value
-         *            the other range to check against
-         * @return true if the value range is full or partially within this
-         *         range
+         * @param value the other range to check against
+         * @return true if the value range is full or partially within this range
          */
         public boolean overlap(final Range value)
         {
@@ -158,8 +156,7 @@ public class ConfigRange
         /**
          * Is the value in the range, including boundaries
          *
-         * @param value
-         *            value to check
+         * @param value value to check
          * @return true if the value is in the range including boundaries
          */
         public boolean inside(final int value)
@@ -177,8 +174,7 @@ public class ConfigRange
         /**
          * Is the value in the range, including boundaries
          *
-         * @param value
-         *            value to check
+         * @param value value to check
          * @return true if the value is in the range including boundaries
          */
         public boolean inside(final double value)
@@ -196,8 +192,7 @@ public class ConfigRange
         /**
          * Is the value in the range, excluding boundaries
          *
-         * @param value
-         *            value to check
+         * @param value value to check
          * @return true if the value is in the range excluding boundaries
          */
         public boolean insideExclusive(final int value)
@@ -215,8 +210,7 @@ public class ConfigRange
         /**
          * Is the value in the range, excluding boundaries
          *
-         * @param value
-         *            value to check
+         * @param value value to check
          * @return true if the value is in the range excluding boundaries
          */
         public boolean insideExclusive(final double value)
@@ -234,8 +228,7 @@ public class ConfigRange
         /**
          * Turns things like 1-2 into 1 and 2.
          *
-         * @param range
-         *            the range definition to parse
+         * @param range the range definition to parse
          * @return a new range or null in case of problems
          */
         public static Range parse(final String range)
