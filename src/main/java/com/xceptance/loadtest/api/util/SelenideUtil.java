@@ -34,7 +34,7 @@ public class SelenideUtil
         com.codeborne.selenide.Configuration.screenshots = configuration.selenideRecordScreenshots;
 
         // Fetch XLT result directory of this session
-        final String resultDirectory = ((com.xceptance.xlt.engine.SessionImpl) session).getResultsDirectory()
+        final String resultDirectory = ((com.xceptance.xlt.engine.SessionImpl) session).getResultsDirectory().toFile()
                 .toString();
 
         // Location of the directory where the screenshots/reports from Selenide will be
