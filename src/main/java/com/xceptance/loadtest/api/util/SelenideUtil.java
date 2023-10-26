@@ -5,7 +5,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
-import org.junit.Assert;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
@@ -35,7 +34,8 @@ public class SelenideUtil
         com.codeborne.selenide.Configuration.screenshots = configuration.selenideRecordScreenshots;
 
         // Fetch XLT result directory of this session
-        String resultDirectory = ((com.xceptance.xlt.engine.SessionImpl) session).getResultsDirectory().toString();
+        final String resultDirectory = ((com.xceptance.xlt.engine.SessionImpl) session).getResultsDirectory()
+                .toString();
 
         // Location of the directory where the screenshots/reports from Selenide will be
         // saved
@@ -57,8 +57,8 @@ public class SelenideUtil
         // Set position of browser window
         if (!Session.getCurrent().isLoadTest())
         {
-            int x = XltProperties.getInstance().getProperty("browser.window.x", 0);
-            int y = XltProperties.getInstance().getProperty("browser.window.y", 0);
+            final int x = XltProperties.getInstance().getProperty("browser.window.x", 0);
+            final int y = XltProperties.getInstance().getProperty("browser.window.y", 0);
 
             webDriver.manage().window().setPosition(new Point(x, y));
         }
@@ -110,15 +110,14 @@ public class SelenideUtil
      * @param topOffset               An offset onto the scrolling position to
      *                                account for fixed header elements
      */
-    public static void scrollElementIntoView(SelenideElement elementToScrollIntoView, boolean alignToTopOfElement,
-            int topOffset)
+    public static void scrollElementIntoView(SelenideElement elementToScrollIntoView, boolean alignToTopOfElement, int topOffset)
     {
         final String scrollingCode = "var node = arguments[0];" + "var headerHeight = arguments[2];"
                 + "node.scrollIntoView(arguments[1]);" + "var scrolledY = window.scrollY;" + "if(scrolledY) {"
                 + "  window.scroll(0, scrolledY - headerHeight);" + "}";
 
-        Selenide.executeJavaScript(scrollingCode, elementToScrollIntoView.should(exist).toWebElement(),
-                alignToTopOfElement, topOffset);
+        Selenide.executeJavaScript(scrollingCode, elementToScrollIntoView.should(exist)
+                .toWebElement(), alignToTopOfElement, topOffset);
         Selenide.sleep(300);
     }
 
@@ -135,8 +134,7 @@ public class SelenideUtil
      * @param fixedHeader             The fixed header element which height is
      *                                considered in the scrolling position
      */
-    public static void scrollElementIntoView(SelenideElement elementToScrollIntoView, boolean alignToTopOfElement,
-            SelenideElement fixedHeader)
+    public static void scrollElementIntoView(SelenideElement elementToScrollIntoView, boolean alignToTopOfElement, SelenideElement fixedHeader)
     {
         scrollElementIntoView(elementToScrollIntoView, alignToTopOfElement, fixedHeader.getRect().getHeight());
     }
@@ -258,13 +256,11 @@ public class SelenideUtil
      *                                     collection will be ignored
      * @return The chosen element
      */
-    public static SelenideElement chooseRandomly(ElementsCollection collection, int validationSizeGreaterOrEqual,
-            boolean ignoreFirst)
+    public static SelenideElement chooseRandomly(ElementsCollection collection, int validationSizeGreaterOrEqual, boolean ignoreFirst)
     {
-        return collection
-                .shouldHave(CollectionCondition.sizeGreaterThanOrEqual(
-                        ((validationSizeGreaterOrEqual == 1) && ignoreFirst) ? 2 : validationSizeGreaterOrEqual))
-                .get(XltRandom.nextInt(ignoreFirst ? 1 : 0, collection.size() - 1));
+        return collection.shouldHave(CollectionCondition.sizeGreaterThanOrEqual(((validationSizeGreaterOrEqual == 1)
+                && ignoreFirst) ? 2 : validationSizeGreaterOrEqual)).get(XltRandom.nextInt(ignoreFirst ? 1
+                        : 0, collection.size() - 1));
     }
 
     /**
@@ -280,8 +276,8 @@ public class SelenideUtil
      */
     public static SelenideElement chooseRandomly(ElementsCollection collection, int first, int last)
     {
-        return collection.shouldHave(CollectionCondition.sizeGreaterThanOrEqual(last + 1))
-                .get(XltRandom.nextInt(first, last));
+        return collection.shouldHave(CollectionCondition.sizeGreaterThanOrEqual(last + 1)).get(XltRandom
+                .nextInt(first, last));
     }
 
     /**
@@ -347,7 +343,7 @@ public class SelenideUtil
      */
     public static void injectJavascriptPopupBlocker()
     {
-        String popupBlocker = "function popupBlocker()" + "{"
+        final String popupBlocker = "function popupBlocker()" + "{"
                 + "   var mails = document.querySelector(\".popup-dialog img[id^='popup-subcription-closes']\");"
                 + "   if(mails != null)" + "   {" + "       mails.parentElement.click();"
                 + "       console.log('Newsletter popup closed')" + "   }" + ""
