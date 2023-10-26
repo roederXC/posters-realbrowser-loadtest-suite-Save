@@ -31,9 +31,9 @@ public abstract class AbstractComponent implements Component
     /**
      * Checks if a component is available.
      * <p>
-     * Note:
-     * Will use implementation validateComponent() but catch all AssertionErrors.
-     * Since waiting (polling) is involved the method should be used with reason.
+     * Note: Will use implementation validateComponent() but catch all
+     * AssertionErrors. Since waiting (polling) is involved the method should be
+     * used with reason.
      *
      * @return true if the component is available, false otherwise.
      */

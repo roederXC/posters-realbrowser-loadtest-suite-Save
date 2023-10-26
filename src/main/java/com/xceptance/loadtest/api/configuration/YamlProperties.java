@@ -20,7 +20,8 @@ import com.xceptance.xlt.api.util.XltLogger;
 /**
  * Conversion from YAML properties to java properties.
  * 
- * Some properties are defined in YAML files. Final representation of all properties will be java style properties.
+ * Some properties are defined in YAML files. Final representation of all
+ * properties will be java style properties.
  * 
  * @author Xceptance Software Technologies
  */
@@ -41,8 +42,7 @@ public class YamlProperties
     /**
      * Build us a property key from the current state on the stack
      *
-     * @param state
-     *            the stack
+     * @param state the stack
      * @return a property key
      */
     private String buildKey(final Deque<String> state)
@@ -65,10 +65,8 @@ public class YamlProperties
     /**
      * Handle all remaining, hopefully primitive types
      *
-     * @param entry
-     *            the entry
-     * @param state
-     *            the current staate of the stack
+     * @param entry the entry
+     * @param state the current staate of the stack
      */
     private void handleTypes(final Object entry, final Deque<String> state)
     {
@@ -78,10 +76,8 @@ public class YamlProperties
     /**
      * Handle lists
      *
-     * @param list
-     *            the list to deal with
-     * @param state
-     *            the current state
+     * @param list  the list to deal with
+     * @param state the current state
      */
     @SuppressWarnings("unchecked")
     private void list(final List<Object> list, final Deque<String> state)
@@ -111,10 +107,8 @@ public class YamlProperties
     /**
      * Deal with maps
      *
-     * @param map
-     *            the map of data
-     * @param state
-     *            the current state
+     * @param map   the map of data
+     * @param state the current state
      */
     @SuppressWarnings("unchecked")
     private void map(final Map<String, Object> map, final Deque<String> state)
@@ -153,8 +147,7 @@ public class YamlProperties
     /**
      * Just do the magic
      *
-     * @param map
-     *            the map to convert
+     * @param map the map to convert
      */
     private void yamlToJavaProperties(final Map<String, Object> map)
     {
@@ -162,11 +155,10 @@ public class YamlProperties
     }
 
     /**
-     * Parses yaml properties and turns them into regular Java properties. If the file does not
-     * exists, it returns null.
+     * Parses yaml properties and turns them into regular Java properties. If the
+     * file does not exists, it returns null.
      *
-     * @param file
-     *            a yaml file
+     * @param file a yaml file
      * @return a Java properties file reader
      * @throws IOException
      * @throws FileNotFoundException
@@ -180,11 +172,10 @@ public class YamlProperties
     }
 
     /**
-     * Parses yaml properties and turns them into regular Java properties. If the file does not
-     * exists, it returns null.
+     * Parses yaml properties and turns them into regular Java properties. If the
+     * file does not exists, it returns null.
      *
-     * @param reader
-     *            a reader for a YAML file
+     * @param reader a reader for a YAML file
      * @return a Java properties file reader
      * @throws IOException
      * @throws FileNotFoundException

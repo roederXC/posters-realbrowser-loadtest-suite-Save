@@ -41,7 +41,7 @@ public class Configuration
     // Basic authentication password
     @Property(key = "general.credentials.password", required = false)
     public String credentialsPassword;
-    
+
     // Loads the first page twice to avoid problems with the inline JS/CSS and
     // authentication, this will double the measured homepage requests. Only needed
     // with auth in place
@@ -77,7 +77,7 @@ public class Configuration
 
     // ================================================================
     // Email
-    
+
     // Email domain
     @Property(key = "general.email.domain")
     public String emailDomain;
@@ -96,7 +96,8 @@ public class Configuration
     @Property(key = "general.debug.actions")
     public boolean useDebugActions;
 
-    // Generate totally random emails by using the UUID generator or use the XltRandom generator to create a reproducible stream of emails
+    // Generate totally random emails by using the UUID generator or use the
+    // XltRandom generator to create a reproducible stream of emails
     @Property(key = "general.email.stronglyRandom")
     public boolean stronglyRandomEmails;
 
@@ -142,30 +143,22 @@ public class Configuration
 
     // ==========================================================
     // Browsing
-    
+
     // How often do we want to walk the catalog path from the top
-    @Property(key = "browsing.flow")
-    public ConfigRange fullBrowseFlow;
+    @Property(key = "browsing.rounds")
+    public ConfigRange browsingRounds;
 
     // How often do we need the categories touched per browsing flow before refining
-    @Property(key = "browsing.flow.categories.flow")
-    public ConfigRange browseCategoriesFlow;
+    @Property(key = "browsing.categoryRounds", immutable = false)
+    public ConfigRange browseCategoriesRounds;
 
-    // How often do we refine within the larger browse flow per round
-    @Property(key = "browsing.flow.refine.flow")
-    public ConfigRange browseRefineFlow;
+    // How often do we page within the larger browse flow per round
+    @Property(key = "browsing.pagingRounds", immutable = false)
+    public ConfigRange pagingRounds;
 
     // Top category browsing probability
-    @Property(key = "browsing.category.top", immutable = false)
-    public ConfigProbability topCategoryBrowsing;
-
-    // Probability for display more
-    @Property(key = "browsing.displaymore", immutable = false)
-    public ConfigProbability displayMoreProbability;
-
-    // Minimum number of products to view when viewing product details
-    @Property(key = "browsing.product.view.count", immutable = false)
-    public ConfigRange productViewCount;
+    @Property(key = "browsing.topCategory", immutable = false)
+    public ConfigProbability topCategoryProbability;
 
     // ===========================================================
     // Cart
@@ -182,14 +175,15 @@ public class Configuration
     @Property(key = "cart.view", immutable = false)
     public ConfigProbability viewCartProbability;
 
-    // Do we need a counter for add2cart and view cart, mainly for performance debugging
-    //@Property(key = "cart.report.bySize")
-    //public boolean reportCartBySize;
+    // Do we need a counter for add2cart and view cart, mainly for performance
+    // debugging
+    // @Property(key = "cart.report.bySize")
+    // public boolean reportCartBySize;
 
     // how many product do we want per add to cart?
     @Property(key = "cart.product.quantity", immutable = false)
     public ConfigRange cartProductQuantity;
-    
+
     // =========================================================
     // Account
 
@@ -232,7 +226,7 @@ public class Configuration
 
     // ===========================================================
     // All data files to be used... this is all for sites aka with hierarchy lookup
-    
+
     // Data file first names
     @Property(key = "data.file.firstNames")
     public String dataFileFirstNames;
@@ -244,12 +238,12 @@ public class Configuration
     // Search phrases and result counts
     @Property(key = "data.file.searchPhrases")
     public String dataFileSearchPhrases;
-    
+
     /**
      * Return text from the localization section, fails if the text is not available
      *
-     * @param key
-     *            the key to search for including hierarchy excluding "localization."
+     * @param key the key to search for including hierarchy excluding
+     *            "localization."
      * @return the found localized
      */
     public String localizedText(final String key)
@@ -265,8 +259,8 @@ public class Configuration
     }
 
     /**
-     * Returns the properties that are current for this context and the source of this
-     * configuration. You can also directly access them, if you like.
+     * Returns the properties that are current for this context and the source of
+     * this configuration. You can also directly access them, if you like.
      *
      * @return the property set
      */
@@ -280,6 +274,6 @@ public class Configuration
      */
     public Configuration()
     {
-    	super();
+        super();
     }
 }

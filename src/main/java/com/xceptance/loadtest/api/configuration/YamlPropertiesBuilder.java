@@ -36,8 +36,7 @@ public class YamlPropertiesBuilder
     /**
      * Try to load
      *
-     * @param file
-     *            the property file to load
+     * @param file the property file to load
      * @return the loaded properties
      */
     private static Optional<Properties> loadFromFile(final Optional<File> file)
@@ -64,12 +63,11 @@ public class YamlPropertiesBuilder
                 // ok, leave with our data
                 return Optional.of(properties);
             }
-        }
-        catch (final IOException e)
+        } catch (final IOException e)
         {
-            XltLogger.runTimeLogger.error(
-                            MessageFormat.format("Failure when loading custom YAML properties file {0}: {1}",
-                                            file.get().toString(), e.getMessage()));
+            XltLogger.runTimeLogger
+                    .error(MessageFormat.format("Failure when loading custom YAML properties file {0}: {1}",
+                            file.get().toString(), e.getMessage()));
         }
 
         return Optional.empty();
@@ -78,10 +76,8 @@ public class YamlPropertiesBuilder
     /**
      * Load a file by name from the configured data directory of the test suite
      *
-     * @param site
-     *            the site context to look first
-     * @param fileName
-     *            the file name with path relative to the data directory
+     * @param site     the site context to look first
+     * @param fileName the file name with path relative to the data directory
      */
     public static Optional<Properties> build(final String key, final String fileName)
     {
@@ -106,7 +102,8 @@ public class YamlPropertiesBuilder
     public static Optional<Properties> buildWithFallback(final Site site, final String fileName)
     {
         // key, this is not a file system location!!!
-        final String key = site.id + File.separatorChar + site.region + File.separatorChar + site.locale + File.separatorChar + fileName;
+        final String key = site.id + File.separatorChar + site.region + File.separatorChar + site.locale
+                + File.separatorChar + fileName;
 
         // check whether or not we already now this thingy
         return propertiesCache.computeIfAbsent(key, k ->

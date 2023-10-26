@@ -66,7 +66,8 @@ public class EnumConfigList<T>
                 else
                 {
                     // complain
-                    throw new UnsupportedOperationException("byId is only supported when the interface ById is implemented");
+                    throw new UnsupportedOperationException(
+                            "byId is only supported when the interface ById is implemented");
                 }
             }
 
@@ -82,8 +83,7 @@ public class EnumConfigList<T>
     /**
      * Get from the underlying list
      *
-     * @param index
-     *            the index to query
+     * @param index the index to query
      * @return the value at the position
      */
     public T get(final int index)
@@ -92,10 +92,10 @@ public class EnumConfigList<T>
     }
 
     /**
-     * Get by Id from the map, but this works only
-     * if this was correctly announced during construction
-     * and T implements ById interface. If this list has not
-     * been enabled to support byId, it will complain with an UnsupportedOperationException.
+     * Get by Id from the map, but this works only if this was correctly announced
+     * during construction and T implements ById interface. If this list has not
+     * been enabled to support byId, it will complain with an
+     * UnsupportedOperationException.
      *
      * @param id the id to look for
      * @return an optional with T if found, otherwise an empty option
@@ -192,7 +192,8 @@ public class EnumConfigList<T>
     public String toString()
     {
         final int maxLen = 10;
-        return "EnumConfigList [byId=" + map.isPresent() + " raw=" + (weightedList != null ? weightedList.subList(0, Math.min(weightedList.size(), maxLen)) : null) + ", size="
-                        + weightedList.size() + "]";
+        return "EnumConfigList [byId=" + map.isPresent() + " raw="
+                + (weightedList != null ? weightedList.subList(0, Math.min(weightedList.size(), maxLen)) : null)
+                + ", size=" + weightedList.size() + "]";
     }
 }

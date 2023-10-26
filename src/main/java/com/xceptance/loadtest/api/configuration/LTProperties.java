@@ -52,10 +52,8 @@ public class LTProperties
     /**
      * Constructor that has two contexts to lookup data
      *
-     * @param fullTestClassName
-     *            the original properties to extend by a prefix
-     * @param prefix
-     *            the prefix to incorporate for enum properties
+     * @param fullTestClassName the original properties to extend by a prefix
+     * @param prefix            the prefix to incorporate for enum properties
      */
     public LTProperties(final String fullTestClassName, final String userName, final String siteId)
     {
@@ -70,10 +68,8 @@ public class LTProperties
     /**
      * Constructor that has two contexts to lookup data
      *
-     * @param propertyLookUp
-     *            the original properties to extend by a prefix
-     * @param prefix
-     *            the prefix to incorporate for enum properties
+     * @param propertyLookUp the original properties to extend by a prefix
+     * @param prefix         the prefix to incorporate for enum properties
      */
     public LTProperties(final LTProperties propertyLookUp, final String prefix)
     {
@@ -90,8 +86,7 @@ public class LTProperties
     /**
      * Add a set of properties for lookup to the beginning of the lookup
      *
-     * @param properties
-     *            the new list of properties to read from
+     * @param properties the new list of properties to read from
      */
     public void addProperties(final Optional<Properties> properties)
     {
@@ -104,8 +99,7 @@ public class LTProperties
     /**
      * Get a property form stack, first hit wins
      *
-     * @param key
-     *            the key to look up
+     * @param key the key to look up
      * @return the property value or null if it does not exist
      */
     private String lookUpProperty(final String key)
@@ -122,11 +116,12 @@ public class LTProperties
     }
 
     /**
-     * Returns the effective key to be used for property lookup via one of the getProperty(...)
-     * methods.
+     * Returns the effective key to be used for property lookup via one of the
+     * getProperty(...) methods.
      *
-     * This method implements the fall-back logic, given example key foobar and site context US,
-     * while the test case TBrowse has also a mapping called TBrowse_US (test case setup).
+     * This method implements the fall-back logic, given example key foobar and site
+     * context US, while the test case TBrowse has also a mapping called TBrowse_US
+     * (test case setup).
      *
      * <ol>
      * <li>TBrowse_US.site.US.foobar
@@ -136,17 +131,16 @@ public class LTProperties
      * <li>site.US.foobar
      * <li>foobar
      *
-     * @param key
-     *            the property key, i.e. without any prefixes
-     * @param siteId
-     *            site specific property prefix (if any)
+     * @param key    the property key, i.e. without any prefixes
+     * @param siteId site specific property prefix (if any)
      * @return the first key that produces a result
      */
     private String getEffectiveKey(final String originalKey, final String siteId)
     {
         String key = originalKey;
 
-        // 0. see if we have any prefix to use when we have enum properties such as a list
+        // 0. see if we have any prefix to use when we have enum properties such as a
+        // list
         key = prefix.orElse("") + originalKey;
 
         final String siteKey = "site." + siteId + "." + key;
@@ -208,8 +202,7 @@ public class LTProperties
      * </ol>
      * As site the currently configured site is taken.
      *
-     * @param bareKey
-     *            the bare property key, i.e. without any prefixes
+     * @param bareKey the bare property key, i.e. without any prefixes
      * @return the first key that produces a result
      */
     public String getEffectiveKey(final String bareKey)
@@ -220,13 +213,11 @@ public class LTProperties
     /**
      * Returns the value for the given key as configured in the test suite
      * configuration. See {@link #getProperty(String)} for a description of the
-     * look-up logic. This method returns the passed default value if the
-     * property value could not be found.
+     * look-up logic. This method returns the passed default value if the property
+     * value could not be found.
      *
-     * @param key
-     *            the property key
-     * @param defaultValue
-     *            the default value
+     * @param key          the property key
+     * @param defaultValue the default value
      * @return the property value as an int
      */
     public int getProperty(final String key, final int defaultValue)
@@ -239,8 +230,7 @@ public class LTProperties
             try
             {
                 return Integer.parseInt(value);
-            }
-            catch (final NumberFormatException e)
+            } catch (final NumberFormatException e)
             {
             }
         }
@@ -253,13 +243,11 @@ public class LTProperties
     /**
      * Returns the value for the given key as configured in the test suite
      * configuration. See {@link #getProperty(String)} for a description of the
-     * look-up logic. This method returns the passed default value if the
-     * property value could not be found.
+     * look-up logic. This method returns the passed default value if the property
+     * value could not be found.
      *
-     * @param key
-     *            the property key
-     * @param defaultValue
-     *            the default value
+     * @param key          the property key
+     * @param defaultValue the default value
      * @return the property value
      */
     public String getProperty(final String key, final String defaultValue)
@@ -273,13 +261,11 @@ public class LTProperties
     /**
      * Returns the value for the given key as configured in the test suite
      * configuration. See {@link #getProperty(String)} for a description of the
-     * look-up logic. This method returns the passed default value if the
-     * property value could not be found.
+     * look-up logic. This method returns the passed default value if the property
+     * value could not be found.
      *
-     * @param key
-     *            the property key
-     * @param defaultValue
-     *            the default value
+     * @param key          the property key
+     * @param defaultValue the default value
      * @return the property value as a boolean
      */
     public boolean getProperty(final String key, final boolean defaultValue)
@@ -297,21 +283,20 @@ public class LTProperties
 
     /**
      * Returns the value for the given key as configured in the test suite
-     * configuration. The process of looking up a property uses multiple
-     * fall-backs. When resolving the value for the key "password", for example,
-     * the following effective keys are tried, in this order:
+     * configuration. The process of looking up a property uses multiple fall-backs.
+     * When resolving the value for the key "password", for example, the following
+     * effective keys are tried, in this order:
      * <ol>
      * <li>the test user name plus simple key, e.g. "TAuthor.password"</li>
      * <li>the test class name plus simple key, e.g.
      * "com.xceptance.xlt.samples.tests.TAuthor.password"</li>
      * <li>the simple key, e.g. "password"</li>
      * </ol>
-     * This multi-step hierarchy allows for test-user-specific or
-     * test-case-specific overrides of certain settings, while falling back to
-     * the globally defined values if such specific settings are absent.
+     * This multi-step hierarchy allows for test-user-specific or test-case-specific
+     * overrides of certain settings, while falling back to the globally defined
+     * values if such specific settings are absent.
      *
-     * @param key
-     *            the simple property key
+     * @param key the simple property key
      * @return the property value, or <code>null</code> if not found
      */
     public String getProperty(final String key)
@@ -320,14 +305,13 @@ public class LTProperties
     }
 
     /**
-     * Returns all properties for this domain key, strips the key from the
-     * property name, e.g. ClassName.Testproperty=ABC --> TestProperty=ABC
-     * Attention: Properties without a domain (e.g. foobar=test) or domain only
-     * properties are invalid and will be ignored. A property has to have at
-     * least this form: domain.propertyname=value
+     * Returns all properties for this domain key, strips the key from the property
+     * name, e.g. ClassName.Testproperty=ABC --> TestProperty=ABC Attention:
+     * Properties without a domain (e.g. foobar=test) or domain only properties are
+     * invalid and will be ignored. A property has to have at least this form:
+     * domain.propertyname=value
      *
-     * @param domain
-     *            domain for the properties
+     * @param domain domain for the properties
      * @return map with all key value pairs of properties
      */
     public Map<String, String> getPropertiesForKey(final String domain)
@@ -342,7 +326,8 @@ public class LTProperties
     @Override
     public String toString()
     {
-        final List<String> all = properties.stringPropertyNames().stream().map(k -> k + " = " + properties.getProperty(k)).sorted().collect(Collectors.toList());
+        final List<String> all = properties.stringPropertyNames().stream()
+                .map(k -> k + " = " + properties.getProperty(k)).sorted().collect(Collectors.toList());
 
         final StringBuilder sb = new StringBuilder(1024);
         for (final String s : all)

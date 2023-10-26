@@ -10,8 +10,9 @@ public interface Page
     /**
      * Initializes the page object.
      * <p>
-     * Will be executed once upon setting the page as current page and before validation of expected page.
-     * Default implementation is empty. Override if initialization code is required.
+     * Will be executed once upon setting the page as current page and before
+     * validation of expected page. Default implementation is empty. Override if
+     * initialization code is required.
      */
     void initialize();
 

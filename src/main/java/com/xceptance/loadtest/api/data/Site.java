@@ -47,18 +47,15 @@ public class Site implements ById
     }
 
     /**
-     * Set the site from internal. This is meant to be used of you don't want to configure a site
-     * via properties.
+     * Set the site from internal. This is meant to be used of you don't want to
+     * configure a site via properties.
      *
-     * @param id
-     *            the id of the site
-     * @param region
-     *            the region the site is in
-     * @param language
-     *            the language of the site
-     * @param active
-     *            is the site active, does not really make sense from internal, because the active
-     *            flag is for automatic site balancing of traffic
+     * @param id       the id of the site
+     * @param region   the region the site is in
+     * @param language the language of the site
+     * @param active   is the site active, does not really make sense from internal,
+     *                 because the active flag is for automatic site balancing of
+     *                 traffic
      */
     public Site(final String id, final String region, final String locale, final boolean active)
     {
@@ -78,8 +75,8 @@ public class Site implements ById
     }
 
     /**
-     * Returns the locale fitting the locale. This will be done only once, assuming that nobody
-     * changes the site during runtime.
+     * Returns the locale fitting the locale. This will be done only once, assuming
+     * that nobody changes the site during runtime.
      *
      * @return the language of the locale
      */
