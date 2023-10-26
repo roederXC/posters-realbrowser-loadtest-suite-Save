@@ -2,7 +2,7 @@ package com.xceptance.loadtest.api.data;
 
 import java.util.function.Supplier;
 
-import com.xceptance.loadtest.api.util.CustomData;
+import com.xceptance.xlt.api.engine.CustomData;
 import com.xceptance.xlt.api.engine.Session;
 
 /**
